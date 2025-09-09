@@ -2104,140 +2104,124 @@
         `;
       }
 
-      // --- Pie Chart by Outcome ---
-      if(window.dbPieChart) window.dbPieChart.destroy();
-      window.dbPieChart = // new Chart(document.getElementById("db-pie-outcome"), {
-        type: 'doughnut',
-        data: {
-          labels: ["Win", "Loss", "Breakeven"],
-          datasets: [{
-            data: [stats.pie.Win||0, stats.pie.Loss||0, stats.pie.Breakeven||0],
-            backgroundColor: [chartColors.lightGreen, chartColors.red, chartColors.yellow],
-            borderColor: chartColors.dark,
-            borderWidth: 2
-          }]
-        },
-        options: {
-          plugins: { 
-            legend: {labels:{color:chartColors.gray, font:{weight:'bold'}}},
-            tooltip: {callbacks:{
-              label: ctx => ctx.label+": "+ctx.parsed+" ("+((ctx.parsed/stats.total*100)||0).toFixed(1)+"%)"
-            }},
-          },
-          cutout: "60%",
-          responsive: true,
-          maintainAspectRatio: false,
-        }
-      });
+      // --- Pie Chart by Outcome (text representation) ---
+      const pieEl = document.getElementById("db-pie-outcome");
+      if (pieEl) {
+        pieEl.innerHTML = `
+          <div style="padding: 20px; background: #1a2236; border-radius: 8px; min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
+            <h4 style="color: #60a5fa; margin: 0 0 15px 0; text-align: center;">Trades by Outcome</h4>
+            <div style="color: #dbeafe;">
+              <div style="margin: 8px 0; display: flex; justify-content: space-between;">
+                <span>🟢 Wins:</span> <span style="color: #22c55e;">${stats.pie.Win || 0}</span>
+              </div>
+              <div style="margin: 8px 0; display: flex; justify-content: space-between;">
+                <span>🔴 Losses:</span> <span style="color: #ef4444;">${stats.pie.Loss || 0}</span>
+              </div>
+              <div style="margin: 8px 0; display: flex; justify-content: space-between;">
+                <span>🟡 Breakeven:</span> <span style="color: #facc15;">${stats.pie.Breakeven || 0}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
 
-      // --- Bar: P&L by Asset ---
-      if(window.dbAssetChart) window.dbAssetChart.destroy();
-      const assetLabels = Object.keys(stats.byAsset);
-      const assetData = assetLabels.map(k=>stats.byAsset[k]);
-      window.dbAssetChart = // new Chart(document.getElementById("db-bar-asset"), {
-        type: 'bar',
-        data: {
-          labels: assetLabels,
-          datasets: [{
-            label: "Net P&L",
-            data: assetData,
-            backgroundColor: assetData.map(v=>v>=0?chartColors.green:chartColors.red)
-          }]
-        },
-        options: {
-          plugins: { legend: {display:false} },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: { ticks:{color:chartColors.gray}, grid:{color:'#28304a'} },
-            y: { beginAtZero:true, ticks:{color:chartColors.gray}, grid:{color:'#28304a'} }
-          }
-        }
-      });
+      // --- Asset Chart (text representation) ---
+      const assetEl = document.getElementById("db-bar-asset");
+      if (assetEl) {
+        const assetList = Object.entries(stats.byAsset).slice(0, 5);
+        assetEl.innerHTML = `
+          <div style="padding: 20px; background: #1a2236; border-radius: 8px; min-height: 200px;">
+            <h4 style="color: #60a5fa; margin: 0 0 15px 0; text-align: center;">P&L by Asset (Top 5)</h4>
+            <div style="color: #dbeafe;">
+              ${assetList.map(([asset, pnl]) => `
+                <div style="margin: 8px 0; display: flex; justify-content: space-between;">
+                  <span>${asset}</span> 
+                  <span style="color: ${pnl >= 0 ? '#22c55e' : '#ef4444'};">
+                    ${pnl >= 0 ? '+' : ''}${parseFloat(pnl).toFixed(2)}
+                  </span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
 
-      // --- Bar: Long vs Short Win Rate ---
-      if(window.dbLongShortChart) window.dbLongShortChart.destroy();
-      const dirs = ["Long","Short"];
-      const wr = dirs.map(d=>stats.byDirection[d].total?stats.byDirection[d].win/stats.byDirection[d].total*100:0);
-      window.dbLongShortChart = // new Chart(document.getElementById("db-bar-longshort"), {
-        type: 'bar',
-        data: {
-          labels: dirs,
-          datasets: [{
-            label: "Win Rate (%)",
-            data: wr,
-            backgroundColor: [chartColors.blue,chartColors.pink]
-          }]
-        },
-        options: {
-          plugins: { legend: {display:false} },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: { ticks:{color:chartColors.gray}, grid:{color:'#28304a'} },
-            y: { beginAtZero:true, max:100, ticks:{color:chartColors.gray}, grid:{color:'#28304a'} }
-          }
-        }
-      });
+      // --- Long vs Short (text representation) ---
+      const longShortEl = document.getElementById("db-bar-longshort");
+      if (longShortEl) {
+        const longWinRate = stats.longWinRate || 0;
+        const shortWinRate = stats.shortWinRate || 0;
+        
+        longShortEl.innerHTML = `
+          <div style="padding: 20px; background: #1a2236; border-radius: 8px; min-height: 200px; display: flex; flex-direction: column; justify-content: center;">
+            <h4 style="color: #60a5fa; margin: 0 0 15px 0; text-align: center;">Long vs Short Performance</h4>
+            <div style="color: #dbeafe; display: flex; justify-content: space-around;">
+              <div style="text-align: center;">
+                <div style="font-size: 18px; margin-bottom: 8px;">📈 Long</div>
+                <div style="color: #22c55e; font-size: 20px; font-weight: bold;">${longWinRate.toFixed(1)}%</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 18px; margin-bottom: 8px;">📉 Short</div>
+                <div style="color: #ef4444; font-size: 20px; font-weight: bold;">${shortWinRate.toFixed(1)}%</div>
+              </div>
+            </div>
+          </div>
+        `;
+      }
 
-      // --- Monthly Performance Bar ---
-      if(window.dbMonthChart) window.dbMonthChart.destroy();
-      const months = Object.keys(stats.byMonth).sort();
-      const monthVals = months.map(m=>stats.byMonth[m]);
-      window.dbMonthChart = // new Chart(document.getElementById("db-bar-month"), {
-        type: 'bar',
-        data: {
-          labels: months,
-          datasets: [{
-            label: "Monthly P&L",
-            data: monthVals,
-            backgroundColor: monthVals.map(v=>v>=0?chartColors.lightGreen:chartColors.red)
-          }]
-        },
-        options: {
-          plugins: { legend: {display:false} },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: { ticks:{color:chartColors.gray}, grid:{color:'#28304a'} },
-            y: { beginAtZero:true, ticks:{color:chartColors.gray}, grid:{color:'#28304a'} }
-          }
-        }
-      });
+      // --- Monthly Performance (simplified) ---
+      const monthEl = document.getElementById("db-bar-month");
+      if (monthEl) {
+        monthEl.innerHTML = `
+          <div style="padding: 20px; background: #1a2236; border-radius: 8px; min-height: 200px; display: flex; flex-direction: column; justify-content: center; text-align: center;">
+            <h4 style="color: #60a5fa; margin: 0 0 15px 0;">Monthly Performance</h4>
+            <div style="color: #dbeafe;">
+              <div style="font-size: 18px; margin: 10px 0;">📅 Current Month</div>
+              <div style="color: #facc15;">Total Trades: ${journal.length}</div>
+              <div style="color: ${stats.pnl >= 0 ? '#22c55e' : '#ef4444'}; margin-top: 8px; font-size: 20px; font-weight: bold;">
+                P&L: ${stats.pnl >= 0 ? '+' : ''}${stats.pnl.toFixed(2)}
+              </div>
+            </div>
+          </div>
+        `;
+      }
 
-      // --- Big Trades (Top 5 Wins & Losses) ---
-      if(window.dbBigChart) window.dbBigChart.destroy();
-      const bigLabels = [
-        ...stats.bigWins.map(e=>`+${e.pnl.toFixed(2)} ${e.asset} [${e.date}]`),
-        ...stats.bigLosses.map(e=>`${e.pnl.toFixed(2)} ${e.asset} [${e.date}]`)
-      ];
-      const bigData = [
-        ...stats.bigWins.map(e=>e.pnl),
-        ...stats.bigLosses.map(e=>e.pnl)
-      ];
-      window.dbBigChart = // new Chart(document.getElementById("db-bar-bigtrades"), {
-        type: 'bar',
-        data: {
-          labels: bigLabels,
-          datasets: [{
-            label: "Biggest Wins/Losses",
-            data: bigData,
-            backgroundColor: [
-              ...stats.bigWins.map(e=>chartColors.lightGreen),
-              ...stats.bigLosses.map(e=>chartColors.red)
-            ]
-          }]
-        },
-        options: {
-          plugins: { legend: {display:false} },
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            x: { ticks:{color:chartColors.gray, autoSkip:false, maxRotation:60, minRotation:30}, grid:{color:'#28304a'} },
-            y: { ticks:{color:chartColors.gray}, grid:{color:'#28304a'} }
-          }
-        }
-      });
+      // --- Largest Wins & Losses (simplified) ---
+      const bigTradesEl = document.getElementById("db-bar-bigtrades");
+      if (bigTradesEl) {
+        const biggestWin = stats.bigWins[0];
+        const biggestLoss = stats.bigLosses[0];
+        
+        bigTradesEl.innerHTML = `
+          <div style="padding: 20px; background: #1a2236; border-radius: 8px; min-height: 200px;">
+            <h4 style="color: #60a5fa; margin: 0 0 15px 0; text-align: center;">Largest Wins & Losses</h4>
+            <div style="color: #dbeafe;">
+              ${biggestWin ? `
+                <div style="margin: 10px 0; padding: 8px; background: rgba(34, 197, 94, 0.1); border-radius: 4px;">
+                  <div style="color: #22c55e; font-weight: bold;">🏆 Biggest Win</div>
+                  <div>${biggestWin.asset} - ${biggestWin.direction}</div>
+                  <div style="color: #22c55e; font-size: 18px;">+${parseFloat(biggestWin.pnl || 0).toFixed(2)}</div>
+                </div>
+              ` : ''}
+              ${biggestLoss ? `
+                <div style="margin: 10px 0; padding: 8px; background: rgba(239, 68, 68, 0.1); border-radius: 4px;">
+                  <div style="color: #ef4444; font-weight: bold;">💥 Biggest Loss</div>
+                  <div>${biggestLoss.asset} - ${biggestLoss.direction}</div>
+                  <div style="color: #ef4444; font-size: 18px;">${parseFloat(biggestLoss.pnl || 0).toFixed(2)}</div>
+                </div>
+              ` : ''}
+              ${!biggestWin && !biggestLoss ? `
+                <div style="text-align: center; color: #9ca3af;">
+                  <div style="font-size: 48px; margin: 20px 0;">📊</div>
+                  <div>No trades yet. Start journaling to see your biggest wins and losses!</div>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      // Charts now use text-based representations instead of Chart.js
 
       // Top Mistakes/Lessons
       const mistakesList = document.getElementById("db-mistakes-list");
@@ -2283,7 +2267,7 @@
 </section>
 </main>
 <footer class="bg-[#232946] text-blue-200 py-4 mt-6 text-center border-t border-blue-900 font-semibold text-base shadow">
-  &copy; 2025 Griffin's Rise: Advanced Trading Journal Pro Edition | Powered by Copilot & TailwindCSS
+  &copy; 2025 Griffin's Rise: Advanced Trading Journal Pro Edition | Self-contained HTML with embedded CSS/JS
 </footer>
 <script>
 /* ========= LOGIN & NAVIGATION JS ========= */
