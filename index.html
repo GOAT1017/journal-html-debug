@@ -330,8 +330,8 @@
     @media (min-width: 768px) {
       .container { max-width: 768px; }
       .md\\:flex-row { flex-direction: row; }
-      .md\\:w-2\\/3 { width: 66.666667%; }
-      .md\\:w-1\\/3 { width: 33.333333%; }
+      .md\:w-2\/3 { width: 66.666667%; }
+      .md\:w-1\/3 { width: 33.333333%; }
       .md\\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
       .md\\:mt-0 { margin-top: 0; }
       .md\\:gap-2 { gap: 0.5rem; }
@@ -462,11 +462,28 @@
     /* Journal Table/Row Animation & UX */
     .highlight-row { background: #facc1530 !important; transition: background 0.7s;}
     .animate-pulse { animation: pulse 0.9s cubic-bezier(0.4, 0, 0.6, 1) 1;}
-    @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 #facc1544;} 70%{box-shadow:0 0 14px 6px #facc1560;}}
+    @keyframes pulse { 
+      0%,100%{box-shadow:0 0 0 0 #facc1544;} 
+      70%{box-shadow:0 0 14px 6px #facc1560;}
+    }
     .animate-bounce { animation: badgeBounce 0.55s cubic-bezier(.18,1.3,.57,.99) 1;}
-    @keyframes badgeBounce { 0%{transform:scale(1);} 25%{transform:scale(1.13);} 40%{transform:scale(0.96);} 70%{transform:scale(1.07);} 100%{transform:scale(1);}
+    @keyframes badgeBounce { 
+      0%{transform:scale(1);} 
+      25%{transform:scale(1.13);} 
+      40%{transform:scale(0.96);} 
+      70%{transform:scale(1.07);} 
+      100%{transform:scale(1);}
     }
     .journal-badge.locked { opacity: 0.35; filter: grayscale(0.82); border: 2px dashed #64748b; color: #64748b; pointer-events: none;}
+    .journal-pnl-readonly {
+      background: #28304a !important;
+      opacity: 0.7;
+    }
+   /* Make completed phase text blue for readability */
+.syllabus-phase-card[data-complete="true"] .syllabus-phase-title,
+.syllabus-phase-card[data-complete="true"] .syllabus-phase-desc {
+  color: #2563eb !important;
+} 
   </style>
 </head>
 <body>
@@ -567,537 +584,574 @@
     </div>
   </div>
 </section>
-<!-- Syllabus Section: Griffin's Rise Trading Mastery (Pro Edition) -->
-<section id="syllabusContent" class="hidden">
-  <div class="max-w-6xl mx-auto p-6">
-    <!-- Header Section -->
-    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 mb-8 shadow-xl">
-      <div class="flex items-center gap-4 mb-4">
-        <span class="icon icon-graduation text-3xl"></span>
-        <h2 class="text-3xl font-extrabold text-white flex-1">Syllabus: Griffin's Rise Trading Mastery</h2>
-        <span class="bg-yellow-50 text-blue-900 px-4 py-2 rounded-full text-sm font-bold shadow">Pro Edition 2025</span>
+<!-- Griffin's Rise Trading Mastery Syllabus (Pro Edition) -->
+<section id="syllabusContent">
+  <div class="syllabus-container">
+    <!-- Header -->
+    <div class="syllabus-header">
+      <div class="syllabus-header-row">
+        <span class="icon"><i class="fas fa-graduation-cap"></i></span>
+        <h2>Syllabus: Griffin's Rise Trading Mastery</h2>
+        <span class="syllabus-badge">Pro Edition 2025</span>
       </div>
-      
-      <!-- Overall Progress -->
-      <div class="bg-white bg-opacity-20 rounded-lg p-4">
-        <div class="flex items-center gap-3 mb-2">
-          <span class="icon icon-chart text-xl text-yellow-200"></span>
-          <h3 class="text-lg font-bold text-white">Your Learning Progress</h3>
+      <div class="syllabus-progress-box">
+        <div class="syllabus-progress-label-row">
+          <span class="icon"><i class="fas fa-chart-line"></i></span>
+          <h3>Your Learning Progress</h3>
         </div>
-        <div class="w-full bg-white bg-opacity-30 rounded-full h-3 mb-2">
-          <div id="syllabus-progress-bar" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-3 rounded-full transition-all" style="width:0%"></div>
+        <div class="syllabus-progress-bar-bg">
+          <div id="syllabus-progress-bar" class="syllabus-progress-bar"></div>
         </div>
-        <div class="flex justify-between items-center">
-          <span id="syllabus-progress-label" class="text-white font-semibold text-sm">0% Complete</span>
-          <button id="syllabus-reset-btn" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
-            Reset Progress
-          </button>
+        <div class="syllabus-progress-footer">
+          <span id="syllabus-progress-label">0% Complete</span>
+          <button id="syllabus-reset-btn">Reset Progress</button>
         </div>
       </div>
     </div>
-
     <!-- Achievement Badges -->
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
-        <span class="icon icon-trophy"></span> Achievement Badges
-      </h3>
-      <div id="syllabus-completed-labels" class="flex flex-wrap gap-3"></div>
+    <div class="syllabus-badges">
+      <h3><span class="icon"><i class="fas fa-trophy"></i></span> Achievement Badges</h3>
+      <div id="syllabus-completed-labels" class="syllabus-completed-labels"></div>
     </div>
-
-    <!-- Phase Cards -->
-    <div class="space-y-6">
-      <!-- Foundation Phase -->
-      <div id="syllabus-foundation" class="phase-card bg-gradient-to-br from-green-400 to-blue-500" data-phase="0">
-        <div class="phase-header" onclick="togglePhase(0)">
-          <div class="flex items-center gap-4">
-            <span class="phase-icon icon icon-cubes text-2xl"></span>
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-white">Phase 1: The Foundation</h3>
-              <p class="text-green-100 text-sm">Mindset, Platform, Risk Management</p>
-            </div>
-            <div class="phase-status">
-              <span class="phase-badge locked">
-                <span class="icon icon-lock mr-1"></span>Locked
-              </span>
-            </div>
-            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
-          </div>
-        </div>
-        
-        <div class="phase-content">
-          <div id="syllabus-phase-0-stats" class="phase-stats"></div>
-          
-          <div class="phase-lessons">
-            <div class="lesson-item">
-              <h4 class="font-semibold text-blue-900 mb-2">📖 Core Concepts</h4>
-              <ul class="text-sm text-blue-800 space-y-1 ml-4">
-                <li>• Deep skepticism and probabilistic thinking</li>
-                <li>• Platform security and tool setup</li>
-                <li>• Risk management mastery</li>
-                <li>• Position sizing calculations</li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <div class="text-xs text-blue-700 mb-2">
-                <span class="icon icon-target mr-1"></span>
-                <strong>Goal:</strong> Build mental armor and technical foundation
-              </div>
-              <button class="complete-phase-btn" onclick="markPhaseComplete(0)">
-                <span class="icon icon-check mr-1"></span>Mark Complete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Discovery Phase -->
-      <div id="syllabus-discovery" class="phase-card bg-gradient-to-br from-yellow-400 to-orange-500" data-phase="1">
-        <div class="phase-header" onclick="togglePhase(1)">
-          <div class="flex items-center gap-4">
-            <span class="phase-icon icon icon-search text-2xl"></span>
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-white">Phase 2: Short Thesis & Discovery</h3>
-              <p class="text-yellow-100 text-sm">Analysis, Red Flags, Market Research</p>
-            </div>
-            <div class="phase-status">
-              <span class="phase-badge locked">
-                <span class="icon icon-lock mr-1"></span>Locked
-              </span>
-            </div>
-            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
-          </div>
-        </div>
-        
-        <div class="phase-content">
-          <div id="syllabus-phase-1-stats" class="phase-stats"></div>
-          
-          <div class="phase-lessons">
-            <div class="lesson-item">
-              <h4 class="font-semibold text-blue-900 mb-2">🔍 Discovery Skills</h4>
-              <ul class="text-sm text-blue-800 space-y-1 ml-4">
-                <li>• Failed hype cycle identification</li>
-                <li>• Red flag and scam spotting</li>
-                <li>• Tokenomics analysis</li>
-                <li>• Sentiment analysis tools</li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <div class="text-xs text-blue-700 mb-2">
-                <span class="icon icon-target mr-1"></span>
-                <strong>Goal:</strong> Master market research and thesis development
-              </div>
-              <button class="complete-phase-btn" onclick="markPhaseComplete(1)">
-                <span class="icon icon-check mr-1"></span>Mark Complete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Execution Phase -->
-      <div id="syllabus-execution" class="phase-card bg-gradient-to-br from-pink-400 to-red-500" data-phase="2">
-        <div class="phase-header" onclick="togglePhase(2)">
-          <div class="flex items-center gap-4">
-            <span class="phase-icon icon icon-pen text-2xl"></span>
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-white">Phase 3: Execution & Journaling</h3>
-              <p class="text-pink-100 text-sm">Trade Entry, Documentation, Process</p>
-            </div>
-            <div class="phase-status">
-              <span class="phase-badge locked">
-                <span class="icon icon-lock mr-1"></span>Locked
-              </span>
-            </div>
-            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
-          </div>
-        </div>
-        
-        <div class="phase-content">
-          <div id="syllabus-phase-2-stats" class="phase-stats"></div>
-          
-          <div class="phase-lessons">
-            <div class="lesson-item">
-              <h4 class="font-semibold text-blue-900 mb-2">⚡ Execution Skills</h4>
-              <ul class="text-sm text-blue-800 space-y-1 ml-4">
-                <li>• Optimal entry point identification</li>
-                <li>• Professional journaling methods</li>
-                <li>• Trade documentation process</li>
-                <li>• Performance tracking systems</li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <div class="text-xs text-blue-700 mb-2">
-                <span class="icon icon-target mr-1"></span>
-                <strong>Goal:</strong> Execute trades with precision and discipline
-              </div>
-              <button class="complete-phase-btn" onclick="markPhaseComplete(2)">
-                <span class="icon icon-check mr-1"></span>Mark Complete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Psychology Phase -->
-      <div id="syllabus-psychology" class="phase-card bg-gradient-to-br from-purple-400 to-pink-500" data-phase="3">
-        <div class="phase-header" onclick="togglePhase(3)">
-          <div class="flex items-center gap-4">
-            <span class="phase-icon icon icon-brain text-2xl"></span>
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-white">Phase 4: Advanced Scenarios & Psychology</h3>
-              <p class="text-purple-100 text-sm">FOMO Control, Loss Management, Discipline</p>
-            </div>
-            <div class="phase-status">
-              <span class="phase-badge locked">
-                <span class="icon icon-lock mr-1"></span>Locked
-              </span>
-            </div>
-            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
-          </div>
-        </div>
-        
-        <div class="phase-content">
-          <div id="syllabus-phase-3-stats" class="phase-stats"></div>
-          
-          <div class="phase-lessons">
-            <div class="lesson-item">
-              <h4 class="font-semibold text-blue-900 mb-2">🧠 Psychology Mastery</h4>
-              <ul class="text-sm text-blue-800 space-y-1 ml-4">
-                <li>• FOMO recognition and control</li>
-                <li>• Loss handling and tilt prevention</li>
-                <li>• Circuit breaker implementation</li>
-                <li>• Emotional discipline systems</li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <div class="text-xs text-blue-700 mb-2">
-                <span class="icon icon-target mr-1"></span>
-                <strong>Goal:</strong> Develop unshakeable trading psychology
-              </div>
-              <button class="complete-phase-btn" onclick="markPhaseComplete(3)">
-                <span class="icon icon-check mr-1"></span>Mark Complete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mastery Phase -->
-      <div id="syllabus-mastery" class="phase-card bg-gradient-to-br from-yellow-400 to-green-400" data-phase="4">
-        <div class="phase-header" onclick="togglePhase(4)">
-          <div class="flex items-center gap-4">
-            <span class="phase-icon icon icon-certificate text-2xl"></span>
-            <div class="flex-1">
-              <h3 class="text-xl font-bold text-white">Phase 5: Mastery & Peer Review</h3>
-              <p class="text-yellow-100 text-sm">Certification, Community, Advanced Analysis</p>
-            </div>
-            <div class="phase-status">
-              <span class="phase-badge locked">
-                <span class="icon icon-lock mr-1"></span>Locked
-              </span>
-            </div>
-            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
-          </div>
-        </div>
-        
-        <div class="phase-content">
-          <div id="syllabus-phase-4-stats" class="phase-stats"></div>
-          
-          <div class="phase-lessons">
-            <div class="lesson-item">
-              <h4 class="font-semibold text-blue-900 mb-2">🎓 Mastery Certification</h4>
-              <ul class="text-sm text-blue-800 space-y-1 ml-4">
-                <li>• Community engagement and peer review</li>
-                <li>• Advanced pattern recognition</li>
-                <li>• Final project and certification</li>
-                <li>• Professional trader transition</li>
-              </ul>
-            </div>
-            <div class="mt-4">
-              <div class="text-xs text-blue-700 mb-2">
-                <span class="icon icon-target mr-1"></span>
-                <strong>Goal:</strong> Achieve professional trading certification
-              </div>
-              <button class="complete-phase-btn" onclick="markPhaseComplete(4)">
-                <span class="icon icon-check mr-1"></span>Mark Complete
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <!-- PHASES -->
+    <div id="syllabus-phases"></div>
     <!-- Footer Tips -->
-    <div class="mt-8 bg-blue-900 rounded-lg p-5 shadow-lg">
-      <div class="flex items-center gap-3 mb-3">
-        <span class="icon icon-rocket text-xl text-yellow-300"></span>
-        <h3 class="text-lg font-bold text-white">Pro Tips for Success</h3>
+    <div class="syllabus-footer">
+      <div class="syllabus-footer-row">
+        <span class="icon"><i class="fas fa-rocket"></i></span>
+        <h3>Pro Tips for Success</h3>
       </div>
-      <div class="text-blue-100 text-sm space-y-2">
-        <p>• Complete phases in order for optimal learning progression</p>
-        <p>• Practice with paper trading before going live</p>
-        <p>• Join our community for peer support and advanced strategies</p>
+      <div class="syllabus-footer-tips">
+        <div>• Complete phases in order for optimal learning progression</div>
+        <div>• Practice with paper trading before going live</div>
+        <div>• Join our community for peer support and advanced strategies</div>
       </div>
-      <div class="mt-4 text-blue-200 text-xs">
-        <span class="icon icon-fire mr-1"></span>
-        Need more resources? Visit 
-        <a href="https://www.babypips.com/" target="_blank" class="text-yellow-300 hover:text-green-300 underline">BabyPips School</a>
-        and 
-        <a href="https://www.tradingview.com/" target="_blank" class="text-yellow-300 hover:text-green-300 underline">TradingView Ideas</a>
+      <div class="syllabus-footer-resources">
+        <span class="icon"><i class="fas fa-fire"></i></span>
+        Need more resources? Visit
+        <a href="https://www.babypips.com/" target="_blank" rel="noopener">BabyPips School</a>
+        and
+        <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView Ideas</a>
       </div>
     </div>
   </div>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-  <script>
-    // === PHASE DEFINITIONS ===
-    const SYLLABUS_PHASES = [
+</section>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+  .syllabus-container {max-width:900px;margin:0 auto;padding:2rem;}
+  .syllabus-header {background: linear-gradient(90deg, #2563eb 0%, #1e293b 100%); border-radius: 1rem; padding:2rem; margin-bottom:2rem; box-shadow: 0 4px 24px 0 #0002;}
+  .syllabus-header-row {display:flex;align-items:center;gap:1rem; margin-bottom:1rem;}
+  .syllabus-header-row h2 {font-size:2rem;font-weight:800;color:#fff;flex:1;}
+  .syllabus-badge {background:#1e293b;color:#ffe066;padding:0.5rem 1.5rem; border-radius:9999px; font-weight:700; font-size:.95rem; border:1px solid #172554; box-shadow:0 2px 6px #0002;}
+  .syllabus-progress-box {background:rgba(37,99,235,.18);border-radius:0.8rem;padding:1rem;}
+  .syllabus-progress-label-row {display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem;}
+  .syllabus-progress-label-row h3 {font-size:1.1rem;font-weight:700;color:#fff;}
+  .syllabus-progress-bar-bg {width:100%;background:#17255450;border-radius:9999px;height:0.85rem;margin-bottom:0.5rem;overflow:hidden;}
+  .syllabus-progress-bar {background:linear-gradient(90deg,#ffe066,#f59e42);height:0.85rem;transition:width .4s; width:0%;border-radius:9999px;}
+  .syllabus-progress-footer {display:flex;justify-content:space-between;align-items:center;}
+  #syllabus-progress-label {color:#fff;font-weight:500;font-size:0.93rem}
+  #syllabus-reset-btn {background:#dc2626;color:#fff;padding:0.35rem 1rem;border-radius:0.4rem;font-size:0.82rem;font-weight:600;cursor:pointer;border:none;transition:.2s;}
+  .syllabus-badges {margin-bottom:2rem;}
+  .syllabus-badges h3 {font-size:1.15rem;font-weight:700;color:#ffe066;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+  .syllabus-completed-labels {display:flex;flex-wrap:wrap;gap:0.65rem;}
+  .syllabus-badge-label { color:#172554; background: #ffe066; border-radius: 4px; font-size: 0.96rem; font-weight: 700; padding: 0.22rem 0.7rem 0.2rem 0.7rem;display:flex;align-items:center;gap:.4rem;}
+  .syllabus-phase-card {
+    background: linear-gradient(110deg, #1e293b 80%, #2563eb 100%);
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px #0002;
+    overflow: hidden;
+    transition:.2s;
+  }
+  .syllabus-phase-card[data-complete="true"] {
+    background: linear-gradient(90deg, #ffe066 0%, #f59e42 100%);
+    box-shadow: 0 3px 12px #f59e4244;
+  }
+  .syllabus-phase-header {
+    display:flex;
+    align-items:center;
+    gap:1rem;
+    cursor:pointer;
+    padding:1.5rem 1.3rem 1.2rem 1.3rem;
+    user-select:none; -webkit-user-select:none;
+    background:rgba(255,255,255,0.04);
+    transition:.2s;
+  }
+  .syllabus-phase-header:hover { background:rgba(255,255,255,0.07);}
+  .syllabus-phase-title {font-size:1.18rem;font-weight:700;color:#fff;}
+  .syllabus-phase-desc {color:#dbeafe;font-size:0.98rem;margin-top:.1rem;}
+  .syllabus-phase-status {margin-left:auto;font-size:0.83rem;font-weight:600;color:#e0e7ef;background:rgba(30,41,59,.65);border-radius:9999px;padding:.2rem 1rem;border:1px solid #2563eb88;}
+  .syllabus-phase-card[data-complete="true"] .syllabus-phase-status {color:#1e293b;background:#ffe066;border-color:#ffd700;}
+  .syllabus-chevron {margin-left:1.1rem;color:#fff;font-size:1.15rem;transition:transform .22s;}
+  .syllabus-phase-card[data-open="true"] .syllabus-chevron {transform:rotate(90deg);}
+  .syllabus-phase-content {background: rgba(30,41,59,0.95);padding:1.5rem 1.4rem 1.4rem 2.7rem;color:#fff;font-size:.97rem;display: none;border-top: 1px solid #2563eb55;animation: syllabus-fadein .35s;}
+  .syllabus-phase-card[data-open="true"] .syllabus-phase-content { display:block; }
+  @keyframes syllabus-fadein { from { opacity:0; transform:translateY(-8px);} to { opacity:1; transform:translateY(0);}}
+  .syllabus-lesson {margin-bottom:1.5rem;background:rgba(37,99,235,.13);border-left:4px solid #2563eb;border-radius:0.5rem;padding:1.1rem 1rem 1rem 1.1rem;}
+  .syllabus-lesson:last-child { margin-bottom:0; }
+  .syllabus-lesson-title { font-weight:600; color:#fff; margin-bottom:0.25rem; }
+  .syllabus-lesson-desc { color:#e0e7ef; font-size:0.98rem; margin-bottom:0.2rem; }
+  .syllabus-lesson ul { margin:0.4rem 0 0.4rem 1.2rem; color:#93c5fd; font-size:0.95rem;}
+  .syllabus-lesson-assignment { color:#fbbf24; font-size:0.96rem; margin-bottom:0.19rem;}
+  .syllabus-lesson-resources { color:#a5b4fc; font-size:0.93rem; margin-bottom:0.3rem;}
+  .syllabus-lesson-resources a { color:#ffe066; text-decoration:underline; margin-right:0.5rem; }
+  .syllabus-lesson-badges { margin-top:0.4rem;}
+  .syllabus-lesson-badge {
+    display:inline-flex;align-items:center;gap:0.3rem;background:#172554;color:#ffe066;padding:0.15rem 0.6rem;border-radius:999px;font-size:0.84rem;font-weight:600;margin-right:0.5rem;
+  }
+  .syllabus-goal { color:#bae6fd;font-size:0.98rem;margin:0.8rem 0 0.2rem 0;font-style:italic;}
+  .syllabus-complete-btn {background:#16a34a;color:#fff;font-weight:700;border:none;padding:0.5rem 1.7rem;font-size:1rem;border-radius:0.5rem;margin-top:0.6rem;cursor:pointer;box-shadow:0 2px 7px #0001;transition:.18s;}
+  .syllabus-complete-btn:active { background:#166534;}
+  .syllabus-badge-img { width:1.7rem; height:1.7rem; border-radius:0.5rem; border:1px solid #ffe066; background:#fff;margin-right:0.4rem;}
+  .syllabus-footer {margin-top:2rem; background:#172554; border-radius:0.7rem; padding:1.3rem; box-shadow:0 3px 9px #0001;}
+  .syllabus-footer-row {display:flex;align-items:center;gap:.7rem;margin-bottom:.7rem;}
+  .syllabus-footer h3 {font-size:1rem;font-weight:700;color:#fff;}
+  .syllabus-footer-tips {color:#bae6fd;font-size:0.97rem;margin-bottom:.7rem;}
+  .syllabus-footer-resources {margin-top:0.5rem;color:#dbeafe;font-size:0.88rem;}
+  .syllabus-footer-resources a {color:#ffe066;text-decoration:underline;}
+</style>
+<script>
+const syllabus = [
+  {
+    id: "lesson1",
+    phase: "Foundation",
+    phaseNumber: 1,
+    lessonNumber: 1,
+    title: "Foundation, Mindset, & Platform Choices",
+    description:
+      "Master the pillars of successful trading, develop a professional mindset, and choose your trading platform.",
+    objectives: [
+      "Understand the three pillars: Risk Management, Probabilistic Thinking, Deep Skepticism.",
+      "Learn to formulate a short thesis.",
+      "Compare centralized (CeFi, e.g. MEXC) and decentralized (DeFi, e.g. Hyperliquid) platforms for short selling.",
+    ],
+    assignment: "Analyze 3-5 failed tokens using MEXC and Dexscreener.",
+    resources: [
+      { title: "MEXC Exchange", url: "https://www.mexc.com/" },
+      { title: "Dexscreener", url: "https://dexscreener.com/" },
+      { title: "Hyperliquid Exchange", url: "https://app.hyperliquid.xyz/trade" },
       {
-        id: "syllabus-foundation",
-        name: "The Foundation: Mindset, Platform, Risk",
-        tradeReq: 3,
+        title: "Probabilistic Thinking (Farnam Street)",
+        url: "https://fs.blog/probabilistic-thinking/",
+      },
+    ],
+    badges: [
+      {
+        id: "starter",
+        name: "Starter Badge",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/1828/1828884.png"
+      },
+    ]
+  },
+  {
+    id: "lesson2",
+    phase: "Foundation",
+    phaseNumber: 1,
+    lessonNumber: 2,
+    title: "Risk Management Mastery",
+    description:
+      "Discover the science of risk and position sizing for short sellers.",
+    objectives: [
+      "Learn advanced position sizing.",
+      "Apply risk management to live trades.",
+      "Avoid common risk pitfalls.",
+    ],
+    assignment: "Calculate risk for 3 sample trades.",
+    resources: [
+      {
+        title: "BabyPips Position Size Calculator",
+        url: "https://www.babypips.com/tools/position-size-calculator",
       },
       {
-        id: "syllabus-discovery", 
-        name: "Short Thesis & Discovery",
-        tradeReq: 4,
+        title: "Risk Management for Traders (Investopedia)",
+        url: "https://www.investopedia.com/articles/trading/09/risk-management.asp",
+      },
+    ],
+    badges: [
+      {
+        id: "risk-ninja",
+        name: "Risk Ninja",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/1055/1055687.png"
+      },
+    ]
+  },
+  {
+    id: "lesson3",
+    phase: "Foundation",
+    phaseNumber: 1,
+    lessonNumber: 3,
+    title: "Platform Mastery & Tool Setup",
+    description:
+      "Get hands-on with your chosen trading platform. Learn to use critical charting and research tools.",
+    objectives: [
+      "Setup accounts on MEXC and Hyperliquid.",
+      "Explore Dexscreener and TradingView for charting.",
+      "Learn basic order types for short selling.",
+    ],
+    assignment: "Setup demo accounts and place test orders.",
+    resources: [
+      { title: "TradingView", url: "https://www.tradingview.com/" },
+      { title: "MEXC Guide", url: "https://www.mexc.com/support" },
+      {
+        title: "Hyperliquid Docs",
+        url: "https://hyperliquid.gitbook.io/hyperliquid-docs",
+      },
+    ],
+    badges: [
+      {
+        id: "toolmaster",
+        name: "Tool Master",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/2659/2659366.png"
+      },
+    ]
+  },
+  {
+    id: "lesson4",
+    phase: "Short Thesis & Discovery",
+    phaseNumber: 2,
+    lessonNumber: 4,
+    title: "Short Thesis Discovery & Analysis",
+    description:
+      "Learn how to discover, analyze, and validate short opportunities using real-time data and research.",
+    objectives: [
+      "Identify failed tokens with strong short setups.",
+      "Use Dexscreener and CoinGecko for live analysis.",
+      "Apply skepticism and research skills for thesis validation.",
+    ],
+    assignment: "Submit 2 short thesis analyses using live tokens.",
+    resources: [
+      { title: "CoinGecko", url: "https://www.coingecko.com/" },
+      {
+        title: "Crypto Fundamentals (Binance)",
+        url: "https://academy.binance.com/en/articles/a-guide-to-cryptocurrency-fundamental-analysis",
+      },
+    ],
+    badges: [
+      {
+        id: "thesis-hunter",
+        name: "Thesis Hunter",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+      },
+    ]
+  },
+  {
+    id: "lesson5",
+    phase: "Short Thesis & Discovery",
+    phaseNumber: 2,
+    lessonNumber: 5,
+    title: "Red Flags & Scam Spotting",
+    description:
+      "Spot common red flags in tokens and projects to avoid traps.",
+    objectives: [
+      "Recognize rug pulls, exit scams, and fake teams.",
+      "Understand liquidity risks.",
+      "Use research tools for scam detection.",
+    ],
+    assignment: "Submit a list of 5 red flags from recent rug pulls.",
+    resources: [
+      { title: "RugDoc.io", url: "https://rugdoc.io/" },
+      {
+        title: "Scam and Fraud (Tech.co)",
+        url: "https://tech.co/news/how-to-avoid-crypto-scams",
+      },
+    ],
+    badges: [
+      {
+        id: "scam-spotter",
+        name: "Scam Spotter",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/1694/1694363.png"
+      },
+    ]
+  },
+  {
+    id: "lesson6",
+    phase: "Execution & Journaling",
+    phaseNumber: 3,
+    lessonNumber: 6,
+    title: "Short Entry Execution",
+    description: "Execute short trades with precision and confidence.",
+    objectives: [
+      "Identify optimal entry points.",
+      "Set stop-loss and take-profit orders.",
+      "Understand slippage and order execution risks.",
+    ],
+    assignment: "Log 2 short trades in your journal.",
+    resources: [
+      {
+        title: "Short Selling Guide (Tastycrypto)",
+        url: "https://www.tastycrypto.com/blog/short-crypto-strategies/",
       },
       {
-        id: "syllabus-execution",
-        name: "Execution & Journaling", 
-        tradeReq: 5,
+        title: "Trading Slippage Explained",
+        url: "https://www.investopedia.com/terms/s/slippage.asp",
+      },
+    ],
+    badges: [
+      {
+        id: "executor",
+        name: "Executor",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/685/685352.png"
+      },
+    ]
+  },
+  {
+    id: "lesson7",
+    phase: "Execution & Journaling",
+    phaseNumber: 3,
+    lessonNumber: 7,
+    title: "Journaling for Improvement",
+    description:
+      "Turn your trading into a science by tracking every detail.",
+    objectives: [
+      "Log every trade with thesis, emotion, and regime.",
+      "Review and reflect on trade outcomes.",
+      "Use journaling data to spot patterns and improve.",
+    ],
+    assignment: "Journal 3 trades and write a reflection.",
+    resources: [
+      {
+        title:
+          "You can track and log every trade in the Advanced Trading Journal provided in this application.",
+        url: ""
+      },
+    ],
+    badges: [
+      {
+        id: "scientist",
+        name: "Trading Scientist",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/4515/4515458.png"
+      },
+    ]
+  },
+  {
+    id: "lesson8",
+    phase: "Advanced Scenarios & Psychology",
+    phaseNumber: 4,
+    lessonNumber: 8,
+    title: "Trader Psychology & FOMO",
+    description:
+      "Master your emotions and avoid psychological traps like FOMO.",
+    objectives: [
+      "Recognize emotional triggers in trading.",
+      "Develop discipline and rules for high-volatility situations.",
+      "Document emotional state in your journal.",
+    ],
+    assignment: "Write about a time you experienced FOMO and its impact.",
+    resources: [
+      {
+        title: "Trading Psychology (BabyPips)",
+        url: "https://www.babypips.com/trading/psychology",
       },
       {
-        id: "syllabus-psychology",
-        name: "Advanced Scenarios & Psychology",
-        tradeReq: 6,
+        title: "FOMO in Trading (Investopedia)",
+        url: "https://www.investopedia.com/fomo-investing-protect-your-money-11757950",
+      },
+    ],
+    badges: [
+      {
+        id: "mindmaster",
+        name: "Mind Master",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/2814/2814666.png"
+      },
+    ]
+  },
+  {
+    id: "lesson9",
+    phase: "Advanced Scenarios & Psychology",
+    phaseNumber: 4,
+    lessonNumber: 9,
+    title: "Dealing with Losses & Tilt",
+    description:
+      "Develop strategies to handle losses and avoid revenge trading.",
+    objectives: [
+      "Understand the impact of losing streaks.",
+      "Create a personal rule for loss limits.",
+      "Journal and reflect on a losing trade.",
+    ],
+    assignment: "Write your loss limit rule and journal a recent loss.",
+    resources: [
+      {
+        title: "Revenge Trading (Superareas)",
+        url: "https://superareas.com/pdf/3of7-RevengeonMarket.pdf",
       },
       {
-        id: "syllabus-mastery",
-        name: "Mastery & Peer Review", 
-        tradeReq: 8,
-      }
-    ];
-
-    // === GLOBAL PHASE INTERACTION FUNCTIONS ===
-    function togglePhase(phaseIndex) {
-      const phaseCard = document.querySelector(`[data-phase="${phaseIndex}"]`);
-      const content = phaseCard.querySelector('.phase-content');
-      const chevron = phaseCard.querySelector('.chevron');
-      
-      if (content.classList.contains('expanded')) {
-        content.classList.remove('expanded');
-        phaseCard.classList.remove('expanded');
-      } else {
-        // Close all other phases
-        document.querySelectorAll('.phase-content.expanded').forEach(c => {
-          c.classList.remove('expanded');
-          c.closest('.phase-card').classList.remove('expanded');
-        });
-        
-        // Open this phase
-        content.classList.add('expanded');
-        phaseCard.classList.add('expanded');
-        
-        // Update stats when opened
-        updatePhaseStats(phaseIndex);
-      }
-    }
-
-    function markPhaseComplete(phaseIndex) {
-      let completed = JSON.parse(localStorage.getItem("syllabusCompletedPhases") || "[]");
-      if (!completed.includes(phaseIndex)) {
-        completed.push(phaseIndex);
-        localStorage.setItem("syllabusCompletedPhases", JSON.stringify(completed));
-        updateAllPhaseStates();
-        showAchievementBadge(phaseIndex);
-      }
-    }
-
-    function updatePhaseStats(phaseIndex) {
-      const journal = getJournal();
-      const entriesByPhase = assignEntriesToPhases(journal);
-      const phase = SYLLABUS_PHASES[phaseIndex];
-      const entries = entriesByPhase[phaseIndex] || [];
-      
-      const wins = entries.filter(e => e.outcome === "Win").length;
-      const losses = entries.filter(e => e.outcome === "Loss").length;
-      const breakevens = entries.filter(e => e.outcome === "Breakeven").length;
-      const pnl = entries.reduce((sum, e) => sum + (parseFloat(e.pnl) || 0), 0);
-      const progress = Math.min(1, entries.length / phase.tradeReq);
-      
-      const statsDiv = document.getElementById(`syllabus-phase-${phaseIndex}-stats`);
-      if (statsDiv) {
-        statsDiv.innerHTML = `
-          <div class="stat-grid">
-            <div class="stat-item">
-              <div class="stat-label">Progress</div>
-              <div class="stat-value">${entries.length}/${phase.tradeReq}</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Wins</div>
-              <div class="stat-value positive">${wins}</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Losses</div>
-              <div class="stat-value negative">${losses}</div>
-            </div>
-            <div class="stat-item">
-              <div class="stat-label">Net P&L</div>
-              <div class="stat-value ${pnl >= 0 ? 'positive' : 'negative'}">$${pnl.toFixed(2)}</div>
-            </div>
-          </div>
-          <div class="w-full bg-blue-100 rounded-full h-2 mb-2">
-            <div class="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full transition-all" style="width:${Math.round(progress * 100)}%"></div>
-          </div>
-          ${entries.length >= phase.tradeReq && !getCompleted().includes(phaseIndex) 
-            ? '<div class="text-green-600 text-sm font-semibold">🎉 Phase unlocked! Mark complete to advance.</div>'
-            : entries.length < phase.tradeReq 
-            ? `<div class="text-blue-600 text-sm">📊 Log ${phase.tradeReq - entries.length} more trade${phase.tradeReq - entries.length > 1 ? 's' : ''} to unlock this phase.</div>`
-            : ''}
-        `;
-      }
-    }
-
-    function updateAllPhaseStates() {
-      const completed = getCompleted();
-      const journal = getJournal();
-      const entriesByPhase = assignEntriesToPhases(journal);
-      
-      SYLLABUS_PHASES.forEach((phase, index) => {
-        const phaseCard = document.querySelector(`[data-phase="${index}"]`);
-        const badge = phaseCard.querySelector('.phase-badge');
-        const button = phaseCard.querySelector('.complete-phase-btn');
-        const entries = entriesByPhase[index] || [];
-        
-        if (completed.includes(index)) {
-          badge.className = 'phase-badge completed';
-          badge.innerHTML = '<span class="icon icon-check mr-1"></span>Completed';
-          button.className = 'complete-phase-btn completed';
-          button.innerHTML = '<span class="icon icon-star mr-1"></span>Completed';
-          phaseCard.style.background = 'linear-gradient(135deg, #facc15, #f59e0b)';
-        } else if (entries.length >= phase.tradeReq) {
-          badge.className = 'phase-badge unlocked';
-          badge.innerHTML = '<span class="icon icon-unlock mr-1"></span>Unlocked';
-        } else {
-          badge.className = 'phase-badge locked';
-          badge.innerHTML = '<span class="icon icon-lock mr-1"></span>Locked';
-        }
-        
-        updatePhaseStats(index);
-      });
-      
-      updateOverallProgress();
-      updateAchievementBadges();
-    }
-
-    function updateOverallProgress() {
-      const completed = getCompleted();
-      const progress = Math.floor((completed.length / SYLLABUS_PHASES.length) * 100);
-      
-      const progressBar = document.getElementById('syllabus-progress-bar');
-      const progressLabel = document.getElementById('syllabus-progress-label');
-      
-      if (progressBar) progressBar.style.width = progress + '%';
-      if (progressLabel) progressLabel.textContent = progress + '% Complete';
-    }
-
-    function updateAchievementBadges() {
-      const completed = getCompleted();
-      const badgeContainer = document.getElementById('syllabus-completed-labels');
-      
-      if (badgeContainer) {
-        badgeContainer.innerHTML = completed.map(index => {
-          const phase = SYLLABUS_PHASES[index];
-          return `<div class="achievement-badge">
-            <span class="icon icon-trophy mr-2"></span>
-            ${phase.name.split(':')[0]}
-          </div>`;
-        }).join('');
-      }
-    }
-
-    function showAchievementBadge(phaseIndex) {
-      // Create a temporary notification
-      const notification = document.createElement('div');
-      notification.className = 'fixed top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-4 rounded-lg shadow-xl z-50';
-      notification.innerHTML = `
-        <div class="flex items-center gap-3">
-          <span class="icon icon-trophy text-2xl"></span>
-          <div>
-            <div class="font-bold">Phase Completed!</div>
-            <div class="text-sm opacity-90">${SYLLABUS_PHASES[phaseIndex].name.split(':')[0]}</div>
-          </div>
+        title: "Handling Trading Losses (Day Trading)",
+        url: "https://www.daytrading.com/deal-with-trading-losses",
+      },
+    ],
+    badges: [
+      {
+        id: "tiltproof",
+        name: "Tilt Proof",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/1292/1292286.png"
+      },
+    ]
+  },
+  {
+    id: "lesson10",
+    phase: "Mastery & Peer Review",
+    phaseNumber: 5,
+    lessonNumber: 10,
+    title: "Peer Review & Community",
+    description:
+      "Participate in peer review and community challenges for advanced learning.",
+    objectives: [
+      "Review and critique peer trade journals.",
+      "Share and discuss trade ideas in community forums.",
+      "Collaborate on finding short setups.",
+    ],
+    assignment: "Peer review 2 journals and share an idea.",
+    resources: [
+      {
+        title: "TradingView Public Chats",
+        url: "https://www.tradingview.com/chat/",
+      },
+      {
+        title: "Discord Trading Communities",
+        url: "https://discord.com/invite/trading",
+      },
+    ],
+    badges: [
+      {
+        id: "peerreviewer",
+        name: "Peer Reviewer",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/1828/1828919.png"
+      },
+    ]
+  },
+  {
+    id: "lesson11",
+    phase: "Mastery & Peer Review",
+    phaseNumber: 5,
+    lessonNumber: 11,
+    title: "Final Project & Certification",
+    description:
+      "Demonstrate your mastery with a final project and earn your certification.",
+    objectives: [
+      "Complete a full trading journal for a month.",
+      "Present your short thesis and trade outcomes.",
+      "Reflect and submit for certification.",
+    ],
+    assignment: "Submit your journal, thesis, and reflection for review.",
+    resources: [
+      {
+        title: "Sample Trading Journal Template (Google Sheets)",
+        url: "https://docs.google.com/spreadsheets/d/1mVLyK5vN3vJw0n62V-xy5vJQf5bQj7IW/",
+      },
+    ],
+    badges: [
+      {
+        id: "certified",
+        name: "Certified Short Seller",
+        imageUrl: "https://cdn-icons-png.flaticon.com/512/190/190411.png"
+      },
+    ]
+  }
+];
+const phaseOrder = [
+  { phase: "Foundation", title: "Phase 1: Foundation", desc: "Mindset, Platform, Risk Management", goal: "Build mental armor and technical foundation" },
+  { phase: "Short Thesis & Discovery", title: "Phase 2: Short Thesis & Discovery", desc: "Analysis, Red Flags, Market Research", goal: "Master market research and thesis development" },
+  { phase: "Execution & Journaling", title: "Phase 3: Execution & Journaling", desc: "Trade Entry, Documentation, Process", goal: "Execute trades with precision and discipline" },
+  { phase: "Advanced Scenarios & Psychology", title: "Phase 4: Advanced Scenarios & Psychology", desc: "FOMO Control, Loss Management, Discipline", goal: "Develop unshakeable trading psychology" },
+  { phase: "Mastery & Peer Review", title: "Phase 5: Mastery & Peer Review", desc: "Certification, Community, Advanced Analysis", goal: "Achieve professional trading certification" }
+];
+function getLocalCompletedPhases() {
+  return JSON.parse(localStorage.getItem("syllabusCompletedPhases") || "[]");
+}
+function setLocalCompletedPhases(arr) {
+  localStorage.setItem("syllabusCompletedPhases", JSON.stringify(arr));
+}
+function renderSyllabus() {
+  const container = document.getElementById("syllabus-phases");
+  container.innerHTML = "";
+  const completed = getLocalCompletedPhases();
+  phaseOrder.forEach((phaseObj, i) => {
+    const lessons = syllabus.filter(l => l.phase === phaseObj.phase);
+    const isComplete = completed.includes(i);
+    const card = document.createElement("div");
+    card.className = "syllabus-phase-card";
+    card.dataset.open = "false";
+    card.dataset.complete = isComplete ? "true" : "false";
+    card.innerHTML = `
+      <div class="syllabus-phase-header">
+        <span class="icon"><i class="fas fa-cube"></i></span>
+        <div>
+          <div class="syllabus-phase-title">${phaseObj.title}</div>
+          <div class="syllabus-phase-desc">${phaseObj.desc}</div>
+        </div>
+        <span class="syllabus-phase-status">${isComplete ? '<i class="fas fa-check-circle"></i> Completed' : '<i class="fas fa-lock"></i> Locked'}</span>
+        <span class="syllabus-chevron"><i class="fas fa-chevron-right"></i></span>
+      </div>
+      <div class="syllabus-phase-content"></div>
+    `;
+    const content = card.querySelector(".syllabus-phase-content");
+    lessons.forEach(lesson => {
+      const badgeHtml = (lesson.badges||[]).map(b =>
+        `<span class="syllabus-lesson-badge"><img class="syllabus-badge-img" src="${b.imageUrl}" alt="">${b.name}</span>`
+      ).join('');
+      content.innerHTML += `
+        <div class="syllabus-lesson">
+          <div class="syllabus-lesson-title">${lesson.lessonNumber}. ${lesson.title}</div>
+          <div class="syllabus-lesson-desc">${lesson.description}</div>
+          <ul>${lesson.objectives.map(o=>`<li>${o}</li>`).join('')}</ul>
+          <div class="syllabus-lesson-assignment"><b>Assignment:</b> ${lesson.assignment}</div>
+          <div class="syllabus-lesson-resources"><b>Resources:</b> ${
+            lesson.resources.filter(r=>r.url).map(r=>
+              `<a href="${r.url}" target="_blank">${r.title}</a>`
+            ).join(' ')
+          }</div>
+          <div class="syllabus-lesson-badges">${badgeHtml}</div>
         </div>
       `;
-      
-      document.body.appendChild(notification);
-      
-      setTimeout(() => {
-        notification.remove();
-      }, 4000);
-    }
-
-    // === HELPER FUNCTIONS ===
-    function getCompleted() {
-      return JSON.parse(localStorage.getItem("syllabusCompletedPhases") || "[]");
-    }
-
-    function getJournal() {
-      try {
-        const data = localStorage.getItem(window.JOURNAL_KEY || "griffinsrise_journal_v1");
-        return data ? JSON.parse(data) : [];
-      } catch { return []; }
-    }
-
-    function assignEntriesToPhases(journal) {
-      const entriesByPhase = SYLLABUS_PHASES.map(() => []);
-      let tradeIdx = 0;
-      
-      for (const entry of journal) {
-        let phaseIdx = typeof entry.phase === "number" ? entry.phase : null;
-        
-        if (phaseIdx == null) {
-          // Auto-assign by order
-          let running = 0;
-          for (let i = 0; i < SYLLABUS_PHASES.length; i++) {
-            running += SYLLABUS_PHASES[i].tradeReq;
-            if (tradeIdx < running) {
-              phaseIdx = i;
-              break;
-            }
-          }
-          if (phaseIdx == null) phaseIdx = SYLLABUS_PHASES.length - 1;
-        }
-        
-        if (entriesByPhase[phaseIdx]) entriesByPhase[phaseIdx].push(entry);
-        tradeIdx++;
-      }
-      
-      return entriesByPhase;
-    }
-
-    // === INITIALIZATION ===
-    document.addEventListener("DOMContentLoaded", function() {
-      // Setup reset button
-      const resetBtn = document.getElementById('syllabus-reset-btn');
-      if (resetBtn) {
-        resetBtn.onclick = function() {
-          if (confirm("Are you sure you want to reset your syllabus progress? This cannot be undone.")) {
-            localStorage.removeItem("syllabusCompletedPhases");
-            updateAllPhaseStates();
-          }
-        };
-      }
-      
-      // Initialize phase states
-      updateAllPhaseStates();
-      
-      // Listen for journal changes
-      window.addEventListener("journalChanged", updateAllPhaseStates);
-      setInterval(updateAllPhaseStates, 10000); // Update every 10 seconds
     });
-  </script>
-</section>  
+    content.innerHTML += `<div class="syllabus-goal"><span class="icon"><i class="fa fa-bullseye"></i></span><b>Goal:</b> ${phaseObj.goal}</div>
+    <button class="syllabus-complete-btn" data-phase="${i}">${isComplete ? '<i class="fa fa-star"></i> Completed' : '<i class="fa fa-check"></i> Mark Complete'}</button>`;
+    // Accordion logic
+    card.querySelector('.syllabus-phase-header').onclick = function() {
+      document.querySelectorAll('.syllabus-phase-card').forEach((c) => {
+        if(c!==card) c.dataset.open = "false";
+      });
+      card.dataset.open = card.dataset.open === "true" ? "false" : "true";
+    };
+    content.querySelector('.syllabus-complete-btn').onclick = function(e) {
+      e.stopPropagation();
+      let arr = getLocalCompletedPhases();
+      if(!arr.includes(i)) arr.push(i);
+      setLocalCompletedPhases(arr);
+      renderSyllabus();
+      updateProgress();
+      updateBadges();
+    };
+    container.appendChild(card);
+  });
+  updateProgress();
+  updateBadges();
+}
+function updateProgress() {
+  const completed = getLocalCompletedPhases();
+  const percent = Math.floor(100*completed.length/phaseOrder.length);
+  document.getElementById('syllabus-progress-bar').style.width = percent + "%";
+  document.getElementById('syllabus-progress-label').innerText = `${percent}% Complete`;
+}
+function updateBadges() {
+  const completed = getLocalCompletedPhases();
+  const badgeContainer = document.getElementById('syllabus-completed-labels');
+  badgeContainer.innerHTML = '';
+  completed.forEach(idx => {
+    const phase = phaseOrder[idx];
+    badgeContainer.innerHTML += `<span class="syllabus-badge-label"><i class="fas fa-trophy"></i> ${phase.title}</span>`;
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  renderSyllabus();
+  document.getElementById('syllabus-reset-btn').onclick = function() {
+    if(confirm("Reset all syllabus progress?")) {
+      setLocalCompletedPhases([]);
+      renderSyllabus();
+    }
+  };
+});
+</script>
 <!-- Training Manual -->
 <!-- Training Manual Section: Professional Pro Edition -->
 <section id="trainingManualContent" class="hidden">
@@ -1648,17 +1702,17 @@
           <input type="number" step="any" id="journal-size" required class="w-full" min="0.00000001" />
         </div>
         <div>
-          <label class="block mb-1" for="journal-outcome">Outcome</label>
-          <select id="journal-outcome" required class="w-full">
-            <option value="Win">Win</option>
-            <option value="Loss">Loss</option>
-            <option value="Breakeven">Breakeven</option>
-          </select>
-        </div>
-        <div>
-          <label class="block mb-1" for="journal-pnl">P&amp;L ($)</label>
-          <input type="number" step="any" id="journal-pnl" readonly tabindex="-1" style="background: #28304a !important; opacity:0.7;" class="w-full" />
-        </div>
+  <label class="block mb-1" for="journal-outcome">Outcome</label>
+  <select id="journal-outcome" required class="w-full">
+    <option value="Win">Win</option>
+    <option value="Loss">Loss</option>
+    <option value="Breakeven">Breakeven</option>
+  </select>
+</div>
+<div>
+  <label class="block mb-1" for="journal-pnl">P&amp;L ($)</label>
+  <input type="number" step="any" id="journal-pnl" readonly tabindex="-1" style="background: #28304a !important; opacity:0.7;" class="w-full" />
+</div>
         <div>
           <label class="block mb-1" for="journal-emotion">Emotion/Psychology</label>
           <input type="text" id="journal-emotion" placeholder="e.g. FOMO, confident..." class="w-full" />
@@ -1728,6 +1782,18 @@
     <tbody id="journal-table-body"></tbody>
   </table>
 </div>
+<style>
+  
+/* Force wrap in Thesis, Emotion, Mistakes, Actions columns */
+#journal-table-body td.wrap-long {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  max-width: 350px;
+  writing-mode: horizontal-tb !important;
+  vertical-align: top !important;
+}
+</style>
 </section>
  <!-- Dashboard -->
 <!-- DASHBOARD SECTION: Clean, Synced, Standalone, Paste-Ready -->
@@ -2581,6 +2647,546 @@ document.getElementById("journalForm").onsubmit = function(e) {
   }, 3000);
 };
 </script>
+<style>
+/* --- Training Manual Color Overhaul for Dark Syllabus Look --- */
+#trainingManualContent {
+  background: #0f172a;
+}
+#trainingManualContent .bg-gradient-to-r,
+#trainingManualContent .bg-gradient-to-br {
+  background: linear-gradient(110deg, #1e293b 80%, #2563eb 100%) !important;
+}
+#trainingManualContent .rounded-xl,
+#trainingManualContent .shadow-xl,
+#trainingManualContent .shadow-lg {
+  box-shadow: 0 2px 16px #0004 !important;
+  border-radius: 1rem !important;
+}
+#trainingManualContent h2,
+#trainingManualContent h3,
+#trainingManualContent h4,
+#trainingManualContent .text-white,
+#trainingManualContent .font-extrabold {
+  color: #fff !important;
+}
+#trainingManualContent h5,
+#trainingManualContent .font-semibold {
+  color: #2563eb !important;
+}
+#trainingManualContent .text-lg,
+#trainingManualContent .text-blue-700,
+#trainingManualContent .text-green-100,
+#trainingManualContent .text-yellow-100,
+#trainingManualContent .text-pink-100,
+#trainingManualContent .text-purple-100 {
+  color: #bae6fd !important;
+}
+#trainingManualContent .bg-white,
+#trainingManualContent .bg-white.bg-opacity-95 {
+  background: #1e293b !important;
+  color: #fff !important;
+}
+#trainingManualContent .border-l-4 {
+  border-left-width: 4px !important;
+  border-color: #2563eb !important;
+  background: #17255433 !important;
+  border-radius: 0.5rem !important;
+}
+#trainingManualContent .text-blue-900,
+#trainingManualContent .text-blue-800 {
+  color: #60a5fa !important;
+}
+#trainingManualContent .italic,
+#trainingManualContent .font-bold {
+  color: #ffe066 !important;
+}
+#trainingManualContent .bg-blue-50,
+#trainingManualContent .bg-purple-50,
+#trainingManualContent .bg-green-50 {
+  background: #172554 !important;
+  color: #ffe066 !important;
+}
+#trainingManualContent .bg-white.bg-opacity-20 {
+  background: #2563eb33 !important;
+}
+#trainingManualContent .text-red-600,
+#trainingManualContent .text-red-500 {
+  color: #f87171 !important;
+}
+#trainingManualContent a {
+  color: #ffe066 !important;
+  text-decoration: underline;
+}
+#trainingManualContent .bg-blue-900 {
+  background: #172554 !important;
+  color: #fff !important;
+}
+#trainingManualContent .text-yellow-300 {
+  color: #ffe066 !important;
+}
+#trainingManualContent .bg-green-400,
+#trainingManualContent .bg-blue-500,
+#trainingManualContent .bg-yellow-400,
+#trainingManualContent .bg-orange-500,
+#trainingManualContent .bg-pink-400,
+#trainingManualContent .bg-red-500,
+#trainingManualContent .bg-purple-400,
+#trainingManualContent .bg-green-400,
+#trainingManualContent .bg-yellow-500 {
+  background: linear-gradient(90deg, #1e293b 80%, #2563eb 100%) !important;
+}
+#trainingManualContent .bg-opacity-20 {
+  background: #1e293b !important;
+}
+</style>
+<script>
+const WRAP_COLS = [4,12,13,14]; // 0-based: Thesis, Emotion, Mistakes, Actions
+const NUM_COLS = 15;
 
+// Helper: Get all rows as data
+function getJournalRows() {
+  return Array.from(document.querySelectorAll('#journal-table-body tr')).map(tr =>
+    Array.from(tr.children).map(td => td.innerText)
+  );
+}
+
+// Helper: Save/load to localStorage
+function saveJournal() {
+  localStorage.setItem('journalEntries', JSON.stringify(getJournalRows()));
+}
+function loadJournal() {
+  const data = JSON.parse(localStorage.getItem('journalEntries') || "[]");
+  document.getElementById('journal-table-body').innerHTML = "";
+  data.forEach(row => addJournalRow(row));
+  updateJournalStats();
+}
+
+// Add a row to the table, optionally with data
+function addJournalRow(rowData = []) {
+  const tr = document.createElement('tr');
+  for (let i = 0; i < NUM_COLS; i++) {
+    const td = document.createElement('td');
+    td.contentEditable = (i !== 11); // Only PNL is readonly
+    td.innerText = rowData[i] || "";
+    if (WRAP_COLS.includes(i)) td.classList.add('wrap-long');
+    // Update PNL if any of the price/size fields change
+    if ([5,6,9].includes(i)) {
+      td.addEventListener('input', () => {
+        autoCalcPNL(tr);
+        saveJournal();
+      });
+    }
+    td.addEventListener('input', saveJournal);
+    tr.appendChild(td);
+  }
+  // Force wrap after edit, always
+  WRAP_COLS.forEach(i => tr.children[i]?.classList.add('wrap-long'));
+  autoCalcPNL(tr);
+  document.getElementById('journal-table-body').appendChild(tr);
+}
+
+// Auto-calc PNL for a row
+function autoCalcPNL(tr) {
+  try {
+    const entry = parseFloat(tr.children[5].innerText);
+    const exit = parseFloat(tr.children[6].innerText);
+    const size = parseFloat(tr.children[9].innerText);
+    if (!isNaN(entry) && !isNaN(exit) && !isNaN(size)) {
+      tr.children[11].innerText = ((exit - entry) * size).toFixed(2);
+    } else {
+      tr.children[11].innerText = "";
+    }
+  } catch {}
+}
+
+// Add Entry from form
+document.getElementById('journalForm').onsubmit = function(e) {
+  e.preventDefault();
+  const f = e.target;
+  const row = [
+    f['journal-date'].value,
+    f['journal-asset'].value,
+    f['journal-direction'].value,
+    f['journal-phase'].value,
+    f['journal-thesis'].value,
+    f['journal-entry'].value,
+    f['journal-exit'].value,
+    f['journal-sl'].value,
+    f['journal-tp'].value,
+    f['journal-size'].value,
+    f['journal-outcome'].value,
+    "", // PNL will be calculated
+    f['journal-emotion'].value,
+    f['journal-mistakes'].value,
+    "" // Actions (empty for now)
+  ];
+  addJournalRow(row);
+  saveJournal();
+  updateJournalStats();
+  f.reset();
+  document.getElementById('journal-message').textContent = "Entry added!";
+  setTimeout(()=>{document.getElementById('journal-message').textContent = "";}, 1500);
+};
+
+// Clear All
+document.getElementById('journalClearBtn').onclick = function() {
+  if (confirm("Clear all journal entries?")) {
+    document.getElementById('journal-table-body').innerHTML = "";
+    saveJournal();
+    updateJournalStats();
+  }
+};
+
+// Export CSV
+document.getElementById('journalExportBtn').onclick = function() {
+  let csv = "";
+  // Header
+  document.querySelectorAll('.overflow-x-auto thead th').forEach(th=>{
+    csv += '"' + th.innerText.replace(/"/g,'""') + '",';
+  });
+  csv = csv.slice(0,-1) + '\n';
+  // Rows
+  getJournalRows().forEach(row => {
+    csv += row.map(cell => '"' + cell.replace(/"/g,'""') + '"').join(",") + '\n';
+  });
+  const blob = new Blob([csv], {type:'text/csv'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = "journal.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
+// Update stats/progress bar
+function updateJournalStats() {
+  const rows = getJournalRows();
+  document.getElementById('journal-progress').textContent =
+    rows.length ? rows.length + " entries logged." : "No entries yet.";
+  // Progress bar/label
+  const bar = document.getElementById('journal-progress-bar');
+  const label = document.getElementById('journal-progress-label');
+  if(bar && label) {
+    const pct = Math.min(100, Math.round(rows.length / 10 * 100));
+    bar.style.width = pct + "%";
+    label.innerText = rows.length + " entries ("+pct+"%)";
+  }
+}
+
+// Restore on load
+loadJournal();
+
+</script>
+<script>
+// Columns to wrap: Thesis (5), Emotion (13), Mistakes (14), Actions (15)
+// Their 0-based indexes: 4, 12, 13, 14
+const WRAP_COLS = [4,12,13,14];
+
+function fixJournalRows() {
+  document.querySelectorAll("#journal-table-body tr").forEach(tr => {
+    // 1. P&L auto-calc
+    const entry = parseFloat(tr.children[5]?.innerText);
+    const exit = parseFloat(tr.children[6]?.innerText);
+    const size = parseFloat(tr.children[9]?.innerText);
+    if (!isNaN(entry) && !isNaN(exit) && !isNaN(size)) {
+      tr.children[11].innerText = ((exit - entry) * size).toFixed(2);
+    } else {
+      tr.children[11].innerText = "";
+    }
+    // 2. Text wrapping for long columns
+    WRAP_COLS.forEach(idx => {
+      const td = tr.children[idx];
+      if (td) {
+        td.style.whiteSpace = "pre-wrap";
+        td.style.wordBreak = "break-word";
+        td.style.overflowWrap = "break-word";
+        td.style.maxWidth = "350px";
+        td.style.writingMode = "horizontal-tb";
+        td.style.verticalAlign = "top";
+      }
+    });
+  });
+}
+
+// Re-run on page load and after every Add Entry
+document.addEventListener("DOMContentLoaded", fixJournalRows);
+// If you have an Add Entry button with id="journalForm", hook it:
+const jForm = document.getElementById("journalForm");
+if (jForm) {
+  jForm.addEventListener("submit", function() {
+    setTimeout(fixJournalRows, 50); // Give table time to update
+  });
+}
+// In case you have Edit-in-place: recalc on editing entry/exit/size
+document.getElementById("journal-table-body").addEventListener("input", function(e) {
+  const td = e.target;
+  const tr = td.closest("tr");
+  if (tr && [5,6,9].includes(td.cellIndex)) {
+    const entry = parseFloat(tr.children[5]?.innerText);
+    const exit = parseFloat(tr.children[6]?.innerText);
+    const size = parseFloat(tr.children[9]?.innerText);
+    if (!isNaN(entry) && !isNaN(exit) && !isNaN(size)) {
+      tr.children[11].innerText = ((exit - entry) * size).toFixed(2);
+    } else {
+      tr.children[11].innerText = "";
+    }
+  }
+  // Always re-apply text wrapping
+  WRAP_COLS.forEach(idx => {
+    const td = tr.children[idx];
+    if (td) {
+      td.style.whiteSpace = "pre-wrap";
+      td.style.wordBreak = "break-word";
+      td.style.overflowWrap = "break-word";
+      td.style.maxWidth = "350px";
+      td.style.writingMode = "horizontal-tb";
+      td.style.verticalAlign = "top";
+    }
+  });
+});
+</script>
+<style>
+/* Force proper width and wrapping for Thesis, Emotion, Mistakes, Actions columns */
+/* Target the <tbody> so it affects dynamic rows as well */
+#journal-table-body td.wrap-long {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  min-width: 220px !important;   /* Ensures at least this width */
+  max-width: 340px !important;   /* Prevents them from being too wide */
+  width: 270px !important;
+  writing-mode: horizontal-tb !important;
+  vertical-align: top !important;
+}
+</style>
+<script>
+// --- P&L live preview in the form ---
+function updatePnlPreview() {
+  const entry = parseFloat(document.getElementById('journal-entry').value);
+  const exit = parseFloat(document.getElementById('journal-exit').value);
+  const size = parseFloat(document.getElementById('journal-size').value);
+  const pnlBox = document.getElementById('journal-pnl');
+  if (!isNaN(entry) && !isNaN(exit) && !isNaN(size)) {
+    pnlBox.value = ((exit - entry) * size).toFixed(2);
+  } else {
+    pnlBox.value = '';
+  }
+}
+['journal-entry','journal-exit','journal-size'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('input', updatePnlPreview);
+});
+
+// --- Table logic: always builds Actions, P&L, wrapping ---
+const WRAP_COLS = [4,12,13]; // Thesis, Emotion, Mistakes
+const NUM_COLS = 15;
+
+// PNL calculation helper
+function calcPNL(entry, exit, size) {
+  const e = parseFloat(entry), x = parseFloat(exit), s = parseFloat(size);
+  return (!isNaN(e) && !isNaN(x) && !isNaN(s)) ? ((x - e) * s).toFixed(2) : "";
+}
+
+// Add one row, including Actions
+function addJournalRow(rowData = []) {
+  const tr = document.createElement('tr');
+  // Fill first 14 columns
+  for (let i = 0; i < NUM_COLS-1; i++) {
+    const td = document.createElement('td');
+    td.innerText = rowData[i] || "";
+    if (WRAP_COLS.includes(i)) td.classList.add('wrap-long');
+    // All editable except PNL (11) and Actions (14)
+    if (i !== 11) {
+      td.contentEditable = true;
+      td.addEventListener('input', function() {
+        if ([5,6,9].includes(i)) {
+          tr.children[11].innerText = calcPNL(
+            tr.children[5].innerText,
+            tr.children[6].innerText,
+            tr.children[9].innerText
+          );
+        }
+        saveJournal();
+      });
+    }
+    tr.appendChild(td);
+  }
+  // PNL column (auto-calc, not editable)
+  tr.children[11].innerText = calcPNL(
+    tr.children[5].innerText,
+    tr.children[6].innerText,
+    tr.children[9].innerText
+  );
+  // Actions column
+  const tdActions = document.createElement('td');
+  tdActions.innerHTML = `
+    <button class="edit-btn" style="margin-right:6px;background:#2563eb;color:#fff;padding:2px 8px;border-radius:4px;cursor:pointer;">Edit</button>
+    <button class="delete-btn" style="background:#dc2626;color:#fff;padding:2px 8px;border-radius:4px;cursor:pointer;">Delete</button>
+  `;
+  tdActions.style.whiteSpace = "nowrap";
+  tdActions.querySelector('.edit-btn').onclick = function() {
+    Array.from(tr.children).forEach((td, idx) => {
+      if(idx !== 11 && idx !== 14) td.contentEditable = true;
+    });
+  };
+  tdActions.querySelector('.delete-btn').onclick = function() {
+    if(confirm("Delete this entry?")) {
+      tr.remove();
+      saveJournal();
+      updateJournalStats();
+    }
+  };
+  tr.appendChild(tdActions);
+
+  // Apply text wrapping
+  WRAP_COLS.forEach(idx => {
+    tr.children[idx].style.whiteSpace = "pre-wrap";
+    tr.children[idx].style.wordBreak = "break-word";
+    tr.children[idx].style.overflowWrap = "break-word";
+    tr.children[idx].style.minWidth = "220px";
+    tr.children[idx].style.maxWidth = "340px";
+    tr.children[idx].style.width = "270px";
+    tr.children[idx].style.verticalAlign = "top";
+  });
+
+  document.getElementById('journal-table-body').appendChild(tr);
+}
+
+// Save/load
+function getJournalRows() {
+  return Array.from(document.querySelectorAll('#journal-table-body tr')).map(tr =>
+    Array.from(tr.children).slice(0,NUM_COLS-1).map(td => td.innerText)
+  );
+}
+function saveJournal() {
+  localStorage.setItem('journalEntries', JSON.stringify(getJournalRows()));
+}
+function loadJournal() {
+  const data = JSON.parse(localStorage.getItem('journalEntries') || "[]");
+  document.getElementById('journal-table-body').innerHTML = "";
+  data.forEach(row => addJournalRow(row));
+  updateJournalStats();
+}
+
+// Progress
+function updateJournalStats() {
+  const rows = getJournalRows();
+  const jp = document.getElementById('journal-progress');
+  if(jp) jp.textContent = rows.length ? rows.length + " entries logged." : "No entries yet.";
+  const bar = document.getElementById('journal-progress-bar');
+  const label = document.getElementById('journal-progress-label');
+  if(bar && label) {
+    const pct = Math.min(100, Math.round(rows.length / 10 * 100));
+    bar.style.width = pct + "%";
+    label.innerText = rows.length + " entries ("+pct+"%)";
+  }
+}
+
+// Add entry from form
+const journalForm = document.getElementById('journalForm');
+if(journalForm) {
+  journalForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const f = e.target;
+    const row = [
+      f['journal-date'].value,
+      f['journal-asset'].value,
+      f['journal-direction'].value,
+      f['journal-phase'].value,
+      f['journal-thesis'].value,
+      f['journal-entry'].value,
+      f['journal-exit'].value,
+      f['journal-sl'].value,
+      f['journal-tp'].value,
+      f['journal-size'].value,
+      f['journal-outcome'].value,
+      "", // PNL auto-calculated
+      f['journal-emotion'].value,
+      f['journal-mistakes'].value
+    ];
+    addJournalRow(row);
+    saveJournal();
+    updateJournalStats();
+    f.reset();
+    document.getElementById('journal-message').textContent = "Entry added!";
+    setTimeout(()=>{document.getElementById('journal-message').textContent = "";}, 1500);
+    updatePnlPreview(); // clear preview
+  });
+}
+
+// Clear all
+const clearBtn = document.getElementById("journalClearBtn");
+if(clearBtn) {
+  clearBtn.addEventListener("click",function() {
+    if (confirm("Clear all journal entries?")) {
+      document.getElementById('journal-table-body').innerHTML = "";
+      saveJournal();
+      updateJournalStats();
+    }
+  });
+}
+
+// Export CSV
+const exportBtn = document.getElementById("journalExportBtn");
+if(exportBtn) {
+  exportBtn.addEventListener("click",function() {
+    let csv = "";
+    document.querySelectorAll('.overflow-x-auto thead th').forEach(th=>{
+      csv += '"' + th.innerText.replace(/"/g,'""') + '",';
+    });
+    csv = csv.slice(0,-1) + '\n';
+    getJournalRows().forEach(row => {
+      csv += row.map(cell => '"' + cell.replace(/"/g,'""') + '"').join(",") + '\n';
+    });
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "journal.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  loadJournal();
+  updatePnlPreview();
+});
+
+// --- Style fixes: wrapping and P&L field color ---
+const style = document.createElement("style");
+style.textContent = `
+#journal-table-body td.wrap-long {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  min-width: 220px !important;
+  max-width: 340px !important;
+  width: 270px !important;
+  vertical-align: top !important;
+}
+#journal-table-body td:focus {
+  outline: 2px solid #60a5fa;
+  background: #0d233d;
+}
+#journal-table-body button.edit-btn:hover {
+  background: #1d4ed8;
+}
+#journal-table-body button.delete-btn:hover {
+  background: #b91c1c;
+}
+/* Match P&L input to table color */
+#journal-pnl {
+  background: #181e2a !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+`;
+document.head.appendChild(style);
+</script>
 </body>
 </html>
