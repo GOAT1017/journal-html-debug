@@ -16,6 +16,328 @@
       font-family: 'Montserrat', system-ui, sans-serif;
       min-height: 100vh;
       font-size: 16px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Core Tailwind-like utilities */
+    .hidden { display: none !important; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .flex-row { flex-direction: row; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-4 { padding: 1rem; }
+    .p-5 { padding: 1.25rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-5 { margin-bottom: 1.25rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-3 { margin-top: 0.75rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-5 { margin-top: 1.25rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .ml-2 { margin-left: 0.5rem; }
+    .ml-3 { margin-left: 0.75rem; }
+    .ml-auto { margin-left: auto; }
+    .mr-2 { margin-right: 0.5rem; }
+    .mr-3 { margin-right: 0.75rem; }
+    .w-full { width: 100%; }
+    .max-w-4xl { max-width: 56rem; }
+    .max-w-6xl { max-width: 72rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .rounded { border-radius: 0.375rem; }
+    .rounded-lg { border-radius: 0.5rem; }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-full { border-radius: 9999px; }
+    .shadow { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    .border { border-width: 1px; }
+    .border-2 { border-width: 2px; }
+    .border-blue-900 { border-color: #1e3a8a; }
+    .border-blue-700 { border-color: #1d4ed8; }
+    .border-green-400 { border-color: #4ade80; }
+    .border-yellow-400 { border-color: #facc15; }
+    .border-l-4 { border-left-width: 4px; }
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+    .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+    .text-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .font-extrabold { font-weight: 800; }
+    .text-blue-50 { color: #eff6ff; }
+    .text-blue-100 { color: #dbeafe; }
+    .text-blue-200 { color: #bfdbfe; }
+    .text-blue-300 { color: #93c5fd; }
+    .text-yellow-100 { color: #fef3c7; }
+    .text-yellow-200 { color: #fde68a; }
+    .text-yellow-300 { color: #fde047; }
+    .text-yellow-400 { color: #facc15; }
+    .text-green-100 { color: #dcfce7; }
+    .text-green-300 { color: #86efac; }
+    .text-green-400 { color: #4ade80; }
+    .text-red-400 { color: #f87171; }
+    .text-red-600 { color: #dc2626; }
+    .text-purple-300 { color: #c4b5fd; }
+    .text-pink-300 { color: #f9a8d4; }
+    .text-orange-300 { color: #fdba74; }
+    .bg-blue-700 { background-color: #1d4ed8; }
+    .bg-blue-800 { background-color: #1e40af; }
+    .bg-blue-900 { background-color: #1e3a8a; }
+    .bg-green-700 { background-color: #15803d; }
+    .bg-green-800 { background-color: #166534; }
+    .bg-red-600 { background-color: #dc2626; }
+    .bg-red-700 { background-color: #b91c1c; }
+    .bg-yellow-50 { background-color: #fefce8; }
+    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+    .from-blue-500 { --tw-gradient-from: #3b82f6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(59, 130, 246, 0)); }
+    .to-purple-600 { --tw-gradient-to: #9333ea; }
+    .from-green-400 { --tw-gradient-from: #4ade80; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(74, 222, 128, 0)); }
+    .to-blue-500 { --tw-gradient-to: #3b82f6; }
+    .from-yellow-400 { --tw-gradient-from: #facc15; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(250, 204, 21, 0)); }
+    .to-orange-500 { --tw-gradient-to: #f97316; }
+    .from-pink-400 { --tw-gradient-from: #f472b6; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(244, 114, 182, 0)); }
+    .to-red-500 { --tw-gradient-to: #ef4444; }
+    .from-purple-400 { --tw-gradient-from: #c084fc; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(192, 132, 252, 0)); }
+    .to-pink-500 { --tw-gradient-to: #ec4899; }
+    .hover\\:bg-blue-700:hover { background-color: #1d4ed8; }
+    .hover\\:bg-blue-800:hover { background-color: #1e40af; }
+    .hover\\:bg-green-800:hover { background-color: #166534; }
+    .hover\\:bg-red-700:hover { background-color: #b91c1c; }
+    .cursor-pointer { cursor: pointer; }
+    .transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transform { transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+    .hover\\:scale-105:hover { --tw-scale-x: 1.05; --tw-scale-y: 1.05; }
+    .hover\\:shadow-xl:hover { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    .opacity-75 { opacity: 0.75; }
+    .opacity-90 { opacity: 0.9; }
+    
+    /* FontAwesome Icons (inline fallback) */
+    .icon { display: inline-block; width: 1em; height: 1em; text-align: center; }
+    .icon-graduation::before { content: "🎓"; }
+    .icon-chart::before { content: "📊"; }
+    .icon-trophy::before { content: "🏆"; }
+    .icon-star::before { content: "⭐"; }
+    .icon-book::before { content: "📚"; }
+    .icon-target::before { content: "🎯"; }
+    .icon-brain::before { content: "🧠"; }
+    .icon-certificate::before { content: "📜"; }
+    .icon-cubes::before { content: "🧩"; }
+    .icon-search::before { content: "🔍"; }
+    .icon-pen::before { content: "✍️"; }
+    .icon-lock::before { content: "🔒"; }
+    .icon-unlock::before { content: "🔓"; }
+    .icon-check::before { content: "✅"; }
+    .icon-fire::before { content: "🔥"; }
+    .icon-rocket::before { content: "🚀"; }
+    .icon-diamond::before { content: "💎"; }
+    .icon-chevron-down::before { content: "▼"; }
+    .icon-chevron-right::before { content: "▶"; }
+    
+    /* Phase Card Styles */
+    .phase-card {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    .phase-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    }
+    
+    .phase-header {
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .phase-header:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .phase-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      background: rgba(255, 255, 255, 0.95);
+      color: #1f2937;
+    }
+    .phase-content.expanded {
+      max-height: 500px;
+      padding: 1.5rem;
+    }
+    
+    .phase-stats {
+      background: #e0f2fe;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #0ea5e9;
+    }
+    
+    .phase-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .phase-badge.locked {
+      background: #64748b;
+      color: white;
+    }
+    .phase-badge.unlocked {
+      background: #22c55e;
+      color: white;
+    }
+    .phase-badge.completed {
+      background: linear-gradient(90deg, #facc15, #22c55e);
+      color: #1f2937;
+    }
+    
+    .lesson-item {
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid #3b82f6;
+    }
+    
+    .complete-phase-btn {
+      background: linear-gradient(90deg, #22c55e, #16a34a);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+    }
+    .complete-phase-btn:hover {
+      background: linear-gradient(90deg, #16a34a, #15803d);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+    .complete-phase-btn.completed {
+      background: linear-gradient(90deg, #facc15, #f59e0b);
+      color: #1f2937;
+    }
+    
+    .chevron {
+      transition: transform 0.3s ease;
+    }
+    .phase-card.expanded .chevron {
+      transform: rotate(90deg);
+    }
+    
+    /* Badge Achievement Styles */
+    .achievement-badge {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #facc15, #f59e0b);
+      color: #1f2937;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+      animation: bounce-in 0.6s ease;
+    }
+    
+    @keyframes bounce-in {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    /* Progress Stats */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .stat-item {
+      background: white;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: #6b7280;
+      font-weight: 500;
+    }
+    .stat-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .stat-value.positive { color: #22c55e; }
+    .stat-value.negative { color: #ef4444; }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .phase-header { padding: 1rem; }
+      .phase-content.expanded { padding: 1rem; }
+      .phase-card h3 { font-size: 1.125rem; }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .container { width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 768px) {
+      .container { max-width: 768px; }
+      .md\\:flex-row { flex-direction: row; }
+      .md\\:w-2\\/3 { width: 66.666667%; }
+      .md\\:w-1\\/3 { width: 33.333333%; }
+      .md\\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .md\\:mt-0 { margin-top: 0; }
+      .md\\:gap-2 { gap: 0.5rem; }
+    }
+    @media (min-width: 1024px) {
+      .container { max-width: 1024px; }
+    }
+    @media (min-width: 1280px) {
+      .container { max-width: 1280px; }
     }
     /* Tab Styles */
     .tab-active {
@@ -242,569 +564,969 @@
     </div>
   </div>
 </section>
-<!-- Syllabus Section: Griffin's Rise Trading Mastery (2025.1, Upgraded) -->
+<!-- Syllabus Section: Griffin's Rise Trading Mastery (Pro Edition) -->
 <section id="syllabusContent" class="hidden">
-  <div class="manual-section syllabus-section p-8 rounded-xl shadow mb-8 mx-auto bg-[#232946] border border-blue-900" style="max-width:60rem;">
-    <!-- Header -->
-    <div class="flex items-center gap-4 mb-6">
-      <i class="fas fa-graduation-cap text-yellow-300 text-3xl"></i>
-      <h2 class="text-3xl font-extrabold text-blue-200 flex-1">Syllabus: Griffin's Rise Trading Mastery</h2>
-      <span class="inline-block rounded px-3 py-1 bg-blue-800/70 text-blue-100 font-semibold text-base border border-blue-700 shadow">Version 2025.1</span>
-    </div>
-    <!-- Progress Tracker -->
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-yellow-100 mb-2 flex items-center gap-2"><i class="fas fa-tasks"></i> Your Progress</h3>
-      <div class="w-full bg-blue-900/60 rounded-full h-6 shadow relative">
-        <div id="syllabus-progress-bar" class="bg-gradient-to-r from-yellow-400 to-green-300 h-6 rounded-full transition-all" style="width:0%"></div>
-        <span id="syllabus-progress-label" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-blue-900 font-bold"></span>
+  <div class="max-w-6xl mx-auto p-6">
+    <!-- Header Section -->
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 mb-8 shadow-xl">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="icon icon-graduation text-3xl"></span>
+        <h2 class="text-3xl font-extrabold text-white flex-1">Syllabus: Griffin's Rise Trading Mastery</h2>
+        <span class="bg-yellow-50 text-blue-900 px-4 py-2 rounded-full text-sm font-bold shadow">Pro Edition 2025</span>
       </div>
-      <div class="flex justify-between items-center mt-2">
-        <div class="flex flex-wrap gap-2 text-sm text-blue-100" id="syllabus-completed-labels"></div>
-        <button id="syllabus-reset-btn" class="px-3 py-1 rounded bg-red-700/80 text-red-100 font-semibold text-sm shadow hover:bg-red-900 transition" title="Reset Progress">
-          <i class="fas fa-undo-alt"></i> Reset Progress
-        </button>
+      
+      <!-- Overall Progress -->
+      <div class="bg-white bg-opacity-20 rounded-lg p-4">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="icon icon-chart text-xl text-yellow-200"></span>
+          <h3 class="text-lg font-bold text-white">Your Learning Progress</h3>
+        </div>
+        <div class="w-full bg-white bg-opacity-30 rounded-full h-3 mb-2">
+          <div id="syllabus-progress-bar" class="bg-gradient-to-r from-yellow-400 to-orange-500 h-3 rounded-full transition-all" style="width:0%"></div>
+        </div>
+        <div class="flex justify-between items-center">
+          <span id="syllabus-progress-label" class="text-white font-semibold text-sm">0% Complete</span>
+          <button id="syllabus-reset-btn" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold transition">
+            Reset Progress
+          </button>
+        </div>
       </div>
-    </div>
-    <!-- Table of Contents -->
-    <div class="mb-8">
-      <h3 class="text-xl font-bold text-yellow-100 mb-3 flex items-center gap-2"><i class="fas fa-list-ol"></i> Table of Contents</h3>
-      <ol class="pl-8 list-decimal text-blue-100 space-y-1">
-        <li><a href="#syllabus-foundation" class="syllabus-link">The Foundation: Mindset, Platform, Risk</a></li>
-        <li><a href="#syllabus-discovery" class="syllabus-link">Short Thesis & Discovery</a></li>
-        <li><a href="#syllabus-execution" class="syllabus-link">Execution & Journaling</a></li>
-        <li><a href="#syllabus-psychology" class="syllabus-link">Advanced Scenarios & Psychology</a></li>
-        <li><a href="#syllabus-mastery" class="syllabus-link">Mastery & Peer Review</a></li>
-      </ol>
     </div>
 
-    <!-- Syllabus Main Content -->
-    <div class="space-y-12">
-      <!-- FOUNDATION -->
-      <div id="syllabus-foundation" class="syllabus-phase">
-        <div class="flex items-center gap-3 mb-2">
-          <i class="fas fa-cubes text-green-300 text-xl"></i>
-          <h3 class="text-2xl font-bold text-yellow-200">1. The Foundation: Mindset, Platform, Risk</h3>
-          <button class="syllabus-complete-btn ml-auto px-3 py-1 rounded bg-green-700/80 text-green-100 font-semibold text-sm shadow hidden"><i class="fas fa-check-circle"></i> Mark Phase Complete</button>
+    <!-- Achievement Badges -->
+    <div class="mb-8">
+      <h3 class="text-xl font-bold text-yellow-300 mb-4 flex items-center gap-2">
+        <span class="icon icon-trophy"></span> Achievement Badges
+      </h3>
+      <div id="syllabus-completed-labels" class="flex flex-wrap gap-3"></div>
+    </div>
+
+    <!-- Phase Cards -->
+    <div class="space-y-6">
+      <!-- Foundation Phase -->
+      <div id="syllabus-foundation" class="phase-card bg-gradient-to-br from-green-400 to-blue-500" data-phase="0">
+        <div class="phase-header" onclick="togglePhase(0)">
+          <div class="flex items-center gap-4">
+            <span class="phase-icon icon icon-cubes text-2xl"></span>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white">Phase 1: The Foundation</h3>
+              <p class="text-green-100 text-sm">Mindset, Platform, Risk Management</p>
+            </div>
+            <div class="phase-status">
+              <span class="phase-badge locked">
+                <span class="icon icon-lock mr-1"></span>Locked
+              </span>
+            </div>
+            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
+          </div>
         </div>
-        <div id="syllabus-phase-0-stats" class="syllabus-phase-stats mb-2"></div>
-        <ol class="list-decimal pl-8 text-blue-100"> ... </ol>
+        
+        <div class="phase-content">
+          <div id="syllabus-phase-0-stats" class="phase-stats"></div>
+          
+          <div class="phase-lessons">
+            <div class="lesson-item">
+              <h4 class="font-semibold text-blue-900 mb-2">📖 Core Concepts</h4>
+              <ul class="text-sm text-blue-800 space-y-1 ml-4">
+                <li>• Deep skepticism and probabilistic thinking</li>
+                <li>• Platform security and tool setup</li>
+                <li>• Risk management mastery</li>
+                <li>• Position sizing calculations</li>
+              </ul>
+            </div>
+            <div class="mt-4">
+              <div class="text-xs text-blue-700 mb-2">
+                <span class="icon icon-target mr-1"></span>
+                <strong>Goal:</strong> Build mental armor and technical foundation
+              </div>
+              <button class="complete-phase-btn" onclick="markPhaseComplete(0)">
+                <span class="icon icon-check mr-1"></span>Mark Complete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- DISCOVERY -->
-      <div id="syllabus-discovery" class="syllabus-phase">
-        <div class="flex items-center gap-3 mb-2">
-          <i class="fas fa-search-dollar text-teal-300 text-xl"></i>
-          <h3 class="text-2xl font-bold text-yellow-200">2. Short Thesis & Discovery</h3>
-          <button class="syllabus-complete-btn ml-auto px-3 py-1 rounded bg-green-700/80 text-green-100 font-semibold text-sm shadow hidden"><i class="fas fa-check-circle"></i> Mark Phase Complete</button>
+
+      <!-- Discovery Phase -->
+      <div id="syllabus-discovery" class="phase-card bg-gradient-to-br from-yellow-400 to-orange-500" data-phase="1">
+        <div class="phase-header" onclick="togglePhase(1)">
+          <div class="flex items-center gap-4">
+            <span class="phase-icon icon icon-search text-2xl"></span>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white">Phase 2: Short Thesis & Discovery</h3>
+              <p class="text-yellow-100 text-sm">Analysis, Red Flags, Market Research</p>
+            </div>
+            <div class="phase-status">
+              <span class="phase-badge locked">
+                <span class="icon icon-lock mr-1"></span>Locked
+              </span>
+            </div>
+            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
+          </div>
         </div>
-        <div id="syllabus-phase-1-stats" class="syllabus-phase-stats mb-2"></div>
-        <ol class="list-decimal pl-8 text-blue-100"> ... </ol>
+        
+        <div class="phase-content">
+          <div id="syllabus-phase-1-stats" class="phase-stats"></div>
+          
+          <div class="phase-lessons">
+            <div class="lesson-item">
+              <h4 class="font-semibold text-blue-900 mb-2">🔍 Discovery Skills</h4>
+              <ul class="text-sm text-blue-800 space-y-1 ml-4">
+                <li>• Failed hype cycle identification</li>
+                <li>• Red flag and scam spotting</li>
+                <li>• Tokenomics analysis</li>
+                <li>• Sentiment analysis tools</li>
+              </ul>
+            </div>
+            <div class="mt-4">
+              <div class="text-xs text-blue-700 mb-2">
+                <span class="icon icon-target mr-1"></span>
+                <strong>Goal:</strong> Master market research and thesis development
+              </div>
+              <button class="complete-phase-btn" onclick="markPhaseComplete(1)">
+                <span class="icon icon-check mr-1"></span>Mark Complete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- EXECUTION & JOURNALING -->
-      <div id="syllabus-execution" class="syllabus-phase">
-        <div class="flex items-center gap-3 mb-2">
-          <i class="fas fa-pen-fancy text-pink-300 text-xl"></i>
-          <h3 class="text-2xl font-bold text-yellow-200">3. Execution & Journaling</h3>
-          <button class="syllabus-complete-btn ml-auto px-3 py-1 rounded bg-green-700/80 text-green-100 font-semibold text-sm shadow hidden"><i class="fas fa-check-circle"></i> Mark Phase Complete</button>
+
+      <!-- Execution Phase -->
+      <div id="syllabus-execution" class="phase-card bg-gradient-to-br from-pink-400 to-red-500" data-phase="2">
+        <div class="phase-header" onclick="togglePhase(2)">
+          <div class="flex items-center gap-4">
+            <span class="phase-icon icon icon-pen text-2xl"></span>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white">Phase 3: Execution & Journaling</h3>
+              <p class="text-pink-100 text-sm">Trade Entry, Documentation, Process</p>
+            </div>
+            <div class="phase-status">
+              <span class="phase-badge locked">
+                <span class="icon icon-lock mr-1"></span>Locked
+              </span>
+            </div>
+            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
+          </div>
         </div>
-        <div id="syllabus-phase-2-stats" class="syllabus-phase-stats mb-2"></div>
-        <ol class="list-decimal pl-8 text-blue-100"> ... </ol>
+        
+        <div class="phase-content">
+          <div id="syllabus-phase-2-stats" class="phase-stats"></div>
+          
+          <div class="phase-lessons">
+            <div class="lesson-item">
+              <h4 class="font-semibold text-blue-900 mb-2">⚡ Execution Skills</h4>
+              <ul class="text-sm text-blue-800 space-y-1 ml-4">
+                <li>• Optimal entry point identification</li>
+                <li>• Professional journaling methods</li>
+                <li>• Trade documentation process</li>
+                <li>• Performance tracking systems</li>
+              </ul>
+            </div>
+            <div class="mt-4">
+              <div class="text-xs text-blue-700 mb-2">
+                <span class="icon icon-target mr-1"></span>
+                <strong>Goal:</strong> Execute trades with precision and discipline
+              </div>
+              <button class="complete-phase-btn" onclick="markPhaseComplete(2)">
+                <span class="icon icon-check mr-1"></span>Mark Complete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- PSYCHOLOGY -->
-      <div id="syllabus-psychology" class="syllabus-phase">
-        <div class="flex items-center gap-3 mb-2">
-          <i class="fas fa-brain text-purple-300 text-xl"></i>
-          <h3 class="text-2xl font-bold text-yellow-200">4. Advanced Scenarios & Psychology</h3>
-          <button class="syllabus-complete-btn ml-auto px-3 py-1 rounded bg-green-700/80 text-green-100 font-semibold text-sm shadow hidden"><i class="fas fa-check-circle"></i> Mark Phase Complete</button>
+
+      <!-- Psychology Phase -->
+      <div id="syllabus-psychology" class="phase-card bg-gradient-to-br from-purple-400 to-pink-500" data-phase="3">
+        <div class="phase-header" onclick="togglePhase(3)">
+          <div class="flex items-center gap-4">
+            <span class="phase-icon icon icon-brain text-2xl"></span>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white">Phase 4: Advanced Scenarios & Psychology</h3>
+              <p class="text-purple-100 text-sm">FOMO Control, Loss Management, Discipline</p>
+            </div>
+            <div class="phase-status">
+              <span class="phase-badge locked">
+                <span class="icon icon-lock mr-1"></span>Locked
+              </span>
+            </div>
+            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
+          </div>
         </div>
-        <div id="syllabus-phase-3-stats" class="syllabus-phase-stats mb-2"></div>
-        <ol class="list-decimal pl-8 text-blue-100"> ... </ol>
+        
+        <div class="phase-content">
+          <div id="syllabus-phase-3-stats" class="phase-stats"></div>
+          
+          <div class="phase-lessons">
+            <div class="lesson-item">
+              <h4 class="font-semibold text-blue-900 mb-2">🧠 Psychology Mastery</h4>
+              <ul class="text-sm text-blue-800 space-y-1 ml-4">
+                <li>• FOMO recognition and control</li>
+                <li>• Loss handling and tilt prevention</li>
+                <li>• Circuit breaker implementation</li>
+                <li>• Emotional discipline systems</li>
+              </ul>
+            </div>
+            <div class="mt-4">
+              <div class="text-xs text-blue-700 mb-2">
+                <span class="icon icon-target mr-1"></span>
+                <strong>Goal:</strong> Develop unshakeable trading psychology
+              </div>
+              <button class="complete-phase-btn" onclick="markPhaseComplete(3)">
+                <span class="icon icon-check mr-1"></span>Mark Complete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-      <!-- MASTERY -->
-      <div id="syllabus-mastery" class="syllabus-phase">
-        <div class="flex items-center gap-3 mb-2">
-          <i class="fas fa-certificate text-yellow-400 text-xl"></i>
-          <h3 class="text-2xl font-bold text-yellow-200">5. Mastery & Peer Review</h3>
-          <button class="syllabus-complete-btn ml-auto px-3 py-1 rounded bg-green-700/80 text-green-100 font-semibold text-sm shadow hidden"><i class="fas fa-check-circle"></i> Mark Phase Complete</button>
+
+      <!-- Mastery Phase -->
+      <div id="syllabus-mastery" class="phase-card bg-gradient-to-br from-yellow-400 to-green-400" data-phase="4">
+        <div class="phase-header" onclick="togglePhase(4)">
+          <div class="flex items-center gap-4">
+            <span class="phase-icon icon icon-certificate text-2xl"></span>
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white">Phase 5: Mastery & Peer Review</h3>
+              <p class="text-yellow-100 text-sm">Certification, Community, Advanced Analysis</p>
+            </div>
+            <div class="phase-status">
+              <span class="phase-badge locked">
+                <span class="icon icon-lock mr-1"></span>Locked
+              </span>
+            </div>
+            <span class="chevron icon icon-chevron-right text-white transition-all"></span>
+          </div>
         </div>
-        <div id="syllabus-phase-4-stats" class="syllabus-phase-stats mb-2"></div>
-        <ol class="list-decimal pl-8 text-blue-100"> ... </ol>
+        
+        <div class="phase-content">
+          <div id="syllabus-phase-4-stats" class="phase-stats"></div>
+          
+          <div class="phase-lessons">
+            <div class="lesson-item">
+              <h4 class="font-semibold text-blue-900 mb-2">🎓 Mastery Certification</h4>
+              <ul class="text-sm text-blue-800 space-y-1 ml-4">
+                <li>• Community engagement and peer review</li>
+                <li>• Advanced pattern recognition</li>
+                <li>• Final project and certification</li>
+                <li>• Professional trader transition</li>
+              </ul>
+            </div>
+            <div class="mt-4">
+              <div class="text-xs text-blue-700 mb-2">
+                <span class="icon icon-target mr-1"></span>
+                <strong>Goal:</strong> Achieve professional trading certification
+              </div>
+              <button class="complete-phase-btn" onclick="markPhaseComplete(4)">
+                <span class="icon icon-check mr-1"></span>Mark Complete
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- Syllabus Footer / Call to action -->
-    <div class="bg-blue-900 rounded-lg p-3 shadow-lg inline-block mt-10">
-      <span class="text-white text-lg font-bold">
-        Tip: Review each phase before moving to the next. Mark as complete to track your journey!
-      </span>
-    </div>
-    <div class="mt-4 text-blue-200 text-sm">
-      <i class="fas fa-lightbulb text-yellow-300"></i> Need more resources? Visit the
-      <a href="https://www.babypips.com/" target="_blank" rel="noopener" class="underline text-yellow-200 hover:text-green-200">BabyPips School</a>
-      and
-      <a href="https://www.tradingview.com/" target="_blank" rel="noopener" class="underline text-yellow-200 hover:text-green-200">TradingView Ideas</a>.
+
+    <!-- Footer Tips -->
+    <div class="mt-8 bg-blue-900 rounded-lg p-5 shadow-lg">
+      <div class="flex items-center gap-3 mb-3">
+        <span class="icon icon-rocket text-xl text-yellow-300"></span>
+        <h3 class="text-lg font-bold text-white">Pro Tips for Success</h3>
+      </div>
+      <div class="text-blue-100 text-sm space-y-2">
+        <p>• Complete phases in order for optimal learning progression</p>
+        <p>• Practice with paper trading before going live</p>
+        <p>• Join our community for peer support and advanced strategies</p>
+      </div>
+      <div class="mt-4 text-blue-200 text-xs">
+        <span class="icon icon-fire mr-1"></span>
+        Need more resources? Visit 
+        <a href="https://www.babypips.com/" target="_blank" class="text-yellow-300 hover:text-green-300 underline">BabyPips School</a>
+        and 
+        <a href="https://www.tradingview.com/" target="_blank" class="text-yellow-300 hover:text-green-300 underline">TradingView Ideas</a>
+      </div>
     </div>
   </div>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
-  <style>
-    .manual-section {font-family: 'Montserrat', system-ui, sans-serif;}
-    .syllabus-section details[open] summary:before {content:"▼ "; color:#facc15;}
-    .syllabus-section summary:before { content:"► "; color:#facc15;}
-    .syllabus-section details {margin-top:0.45rem;}
-    .syllabus-section .syllabus-link {color:#facc15;text-decoration:underline;transition:color 0.2s;}
-    .syllabus-section .syllabus-link:hover {color:#34d399;}
-    .syllabus-section .syllabus-complete-btn {transition:background 0.2s;}
-    .syllabus-section .syllabus-complete-btn.completed {background: linear-gradient(90deg,#34d399,#facc15);}
-    .syllabus-section .syllabus-phase.completed {background:rgba(34,197,94,0.07);}
-    .syllabus-section .syllabus-phase.completed h3, .syllabus-section .syllabus-phase.completed i {color:#34d399!important;}
-    .syllabus-phase-stats {margin: 0.6rem 0 0.9rem 0; padding: 0.8rem 1rem; background: #28304a88; border-radius: 0.6rem; box-shadow: 0 2px 10px 0 #0002;}
-    .syllabus-phase-stats .phase-progbar {height: 0.7rem; background: #22253e; border-radius: 99px; overflow: hidden; margin-bottom: 0.2rem;}
-    .syllabus-phase-stats .phase-progbar-fill {height: 0.7rem; border-radius: 99px; background: linear-gradient(90deg, #fde047 55%, #34d399 100%);}
-    .syllabus-phase-stats .stat-label {color:#facc15;font-weight:bold;margin-right:0.65em;}
-    .syllabus-phase-stats .stat-value {color:#f9fafb;font-weight:bold;}
-    .syllabus-phase-stats .stat-pnl-pos {color:#34d399;}
-    .syllabus-phase-stats .stat-pnl-neg {color:#f87171;}
-    .syllabus-phase-stats .phase-unlocked {color: #34d399; font-weight: bold;}
-    .syllabus-phase-stats .phase-locked {color: #64748b; font-weight: bold;}
-    @media (max-width: 650px) {
-      .manual-section {padding:1.2rem!important;}
-      .syllabus-section h2 {font-size:1.3rem;}
-      .syllabus-section h3 {font-size:1.1rem;}
-      .syllabus-section ul, .syllabus-section ol {font-size:1rem;}
-      .syllabus-phase-stats {padding:0.6rem 0.5rem;}
-    }
-  </style>
   <script>
     // === PHASE DEFINITIONS ===
-    // You can adjust the trade requirements/progression here
     const SYLLABUS_PHASES = [
       {
         id: "syllabus-foundation",
         name: "The Foundation: Mindset, Platform, Risk",
-        tradeReq: 3, // minimum trades to complete phase 1
+        tradeReq: 3,
       },
       {
-        id: "syllabus-discovery",
+        id: "syllabus-discovery", 
         name: "Short Thesis & Discovery",
-        tradeReq: 4, // minimum trades to complete phase 2
+        tradeReq: 4,
       },
       {
         id: "syllabus-execution",
-        name: "Execution & Journaling",
-        tradeReq: 5, // minimum trades to complete phase 3
+        name: "Execution & Journaling", 
+        tradeReq: 5,
       },
       {
         id: "syllabus-psychology",
         name: "Advanced Scenarios & Psychology",
-        tradeReq: 6, // minimum trades to complete phase 4
+        tradeReq: 6,
       },
       {
         id: "syllabus-mastery",
-        name: "Mastery & Peer Review",
-        tradeReq: 8, // minimum trades to complete phase 5
+        name: "Mastery & Peer Review", 
+        tradeReq: 8,
       }
     ];
 
-    // === Syllabus Phase Progress Logic (Upgraded) ===
-    document.addEventListener("DOMContentLoaded", function(){
-      const phaseIds = SYLLABUS_PHASES.map(p=>p.id);
-      const btns = Array.from(document.querySelectorAll(".syllabus-complete-btn"));
-      const phases = phaseIds.map(id=>document.getElementById(id));
-      btns.forEach(btn=>btn.classList.remove("hidden"));
-
-      // --- Load State ---
-      let completed = JSON.parse(localStorage.getItem("syllabusCompletedPhases")||"[]");
-
-      // --- Get Journal Helper ---
-      function getJournal() {
-        try {
-          const data = localStorage.getItem(window.JOURNAL_KEY || "griffinsrise_journal_v1");
-          return data ? JSON.parse(data) : [];
-        } catch { return []; }
+    // === GLOBAL PHASE INTERACTION FUNCTIONS ===
+    function togglePhase(phaseIndex) {
+      const phaseCard = document.querySelector(`[data-phase="${phaseIndex}"]`);
+      const content = phaseCard.querySelector('.phase-content');
+      const chevron = phaseCard.querySelector('.chevron');
+      
+      if (content.classList.contains('expanded')) {
+        content.classList.remove('expanded');
+        phaseCard.classList.remove('expanded');
+      } else {
+        // Close all other phases
+        document.querySelectorAll('.phase-content.expanded').forEach(c => {
+          c.classList.remove('expanded');
+          c.closest('.phase-card').classList.remove('expanded');
+        });
+        
+        // Open this phase
+        content.classList.add('expanded');
+        phaseCard.classList.add('expanded');
+        
+        // Update stats when opened
+        updatePhaseStats(phaseIndex);
       }
+    }
 
-      // --- Assign Journal Entries to Phases (auto or by .phase field) ---
-      function assignEntriesToPhases(journal) {
-        // If entries have a .phase property, use it; otherwise auto-assign by trade order
-        const entriesByPhase = SYLLABUS_PHASES.map(()=>[]);
-        let tradeIdx = 0;
-        for(const entry of journal) {
-          let phaseIdx = typeof entry.phase === "number" ? entry.phase
-            : (typeof entry.phase === "string" && phaseIds.includes(entry.phase)) ? phaseIds.indexOf(entry.phase)
-            : null;
-          if(phaseIdx==null) {
-            // Assign by order: fill each phase as tradeReq is met
-            let running = 0, found = false;
-            for(let i=0; i<SYLLABUS_PHASES.length; ++i) {
-              running += SYLLABUS_PHASES[i].tradeReq;
-              if(tradeIdx < running) { phaseIdx = i; found=true; break; }
-            }
-            if(!found) phaseIdx = SYLLABUS_PHASES.length-1; // overflow to last phase
-          }
-          if(entriesByPhase[phaseIdx]) entriesByPhase[phaseIdx].push(entry);
-          tradeIdx++;
+    function markPhaseComplete(phaseIndex) {
+      let completed = JSON.parse(localStorage.getItem("syllabusCompletedPhases") || "[]");
+      if (!completed.includes(phaseIndex)) {
+        completed.push(phaseIndex);
+        localStorage.setItem("syllabusCompletedPhases", JSON.stringify(completed));
+        updateAllPhaseStates();
+        showAchievementBadge(phaseIndex);
+      }
+    }
+
+    function updatePhaseStats(phaseIndex) {
+      const journal = getJournal();
+      const entriesByPhase = assignEntriesToPhases(journal);
+      const phase = SYLLABUS_PHASES[phaseIndex];
+      const entries = entriesByPhase[phaseIndex] || [];
+      
+      const wins = entries.filter(e => e.outcome === "Win").length;
+      const losses = entries.filter(e => e.outcome === "Loss").length;
+      const breakevens = entries.filter(e => e.outcome === "Breakeven").length;
+      const pnl = entries.reduce((sum, e) => sum + (parseFloat(e.pnl) || 0), 0);
+      const progress = Math.min(1, entries.length / phase.tradeReq);
+      
+      const statsDiv = document.getElementById(`syllabus-phase-${phaseIndex}-stats`);
+      if (statsDiv) {
+        statsDiv.innerHTML = `
+          <div class="stat-grid">
+            <div class="stat-item">
+              <div class="stat-label">Progress</div>
+              <div class="stat-value">${entries.length}/${phase.tradeReq}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Wins</div>
+              <div class="stat-value positive">${wins}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Losses</div>
+              <div class="stat-value negative">${losses}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Net P&L</div>
+              <div class="stat-value ${pnl >= 0 ? 'positive' : 'negative'}">$${pnl.toFixed(2)}</div>
+            </div>
+          </div>
+          <div class="w-full bg-blue-100 rounded-full h-2 mb-2">
+            <div class="bg-gradient-to-r from-blue-500 to-green-500 h-2 rounded-full transition-all" style="width:${Math.round(progress * 100)}%"></div>
+          </div>
+          ${entries.length >= phase.tradeReq && !getCompleted().includes(phaseIndex) 
+            ? '<div class="text-green-600 text-sm font-semibold">🎉 Phase unlocked! Mark complete to advance.</div>'
+            : entries.length < phase.tradeReq 
+            ? `<div class="text-blue-600 text-sm">📊 Log ${phase.tradeReq - entries.length} more trade${phase.tradeReq - entries.length > 1 ? 's' : ''} to unlock this phase.</div>`
+            : ''}
+        `;
+      }
+    }
+
+    function updateAllPhaseStates() {
+      const completed = getCompleted();
+      const journal = getJournal();
+      const entriesByPhase = assignEntriesToPhases(journal);
+      
+      SYLLABUS_PHASES.forEach((phase, index) => {
+        const phaseCard = document.querySelector(`[data-phase="${index}"]`);
+        const badge = phaseCard.querySelector('.phase-badge');
+        const button = phaseCard.querySelector('.complete-phase-btn');
+        const entries = entriesByPhase[index] || [];
+        
+        if (completed.includes(index)) {
+          badge.className = 'phase-badge completed';
+          badge.innerHTML = '<span class="icon icon-check mr-1"></span>Completed';
+          button.className = 'complete-phase-btn completed';
+          button.innerHTML = '<span class="icon icon-star mr-1"></span>Completed';
+          phaseCard.style.background = 'linear-gradient(135deg, #facc15, #f59e0b)';
+        } else if (entries.length >= phase.tradeReq) {
+          badge.className = 'phase-badge unlocked';
+          badge.innerHTML = '<span class="icon icon-unlock mr-1"></span>Unlocked';
+        } else {
+          badge.className = 'phase-badge locked';
+          badge.innerHTML = '<span class="icon icon-lock mr-1"></span>Locked';
         }
-        return entriesByPhase;
-      }
-
-      // --- Update Phase Stats & Unlock ---
-      function updatePhaseStatsAndUnlock() {
-        const journal = getJournal();
-        const entriesByPhase = assignEntriesToPhases(journal);
-        let unlocked = [];
-        let totalPhases = SYLLABUS_PHASES.length;
-
-        // Per-phase stats and unlock
-        SYLLABUS_PHASES.forEach((phase, i) => {
-          const entries = entriesByPhase[i] || [];
-          const wins = entries.filter(e=>e.outcome==="Win").length;
-          const losses = entries.filter(e=>e.outcome==="Loss").length;
-          const breakevens = entries.filter(e=>e.outcome==="Breakeven").length;
-          const pnl = entries.reduce((sum,e)=>sum+(parseFloat(e.pnl)||0), 0);
-          const prog = Math.min(1, entries.length/phase.tradeReq);
-          const phaseStatsDiv = document.getElementById(`syllabus-phase-${i}-stats`);
-          phaseStatsDiv.innerHTML =
-            `<div class="phase-progbar mb-2"><div class="phase-progbar-fill" style="width:${Math.round(prog*100)}%"></div></div>
-            <div>
-              <span class="stat-label">Status:</span>
-              <span class="${entries.length>=phase.tradeReq ? 'phase-unlocked' : 'phase-locked'}">
-                ${entries.length>=phase.tradeReq ? 'Unlocked' : 'Locked'}
-              </span>
-              <span style="margin-left:1.2em;" class="stat-label">Progress:</span>
-              <span class="stat-value">${entries.length}/${phase.tradeReq} trades</span>
-            </div>
-            <div>
-              <span class="stat-label">Wins:</span> <span class="stat-value">${wins}</span>
-              <span class="stat-label">Losses:</span> <span class="stat-value">${losses}</span>
-              <span class="stat-label">Breakeven:</span> <span class="stat-value">${breakevens}</span>
-              <span class="stat-label">Net P&L:</span> <span class="stat-value ${pnl>=0?'stat-pnl-pos':'stat-pnl-neg'}">${pnl>=0?'+':''}${pnl.toFixed(2)}</span>
-            </div>
-            ${entries.length<phase.tradeReq && (phase.tradeReq-entries.length)<=2 && entries.length>0
-                ? `<div class="mt-1 text-yellow-200 text-[0.92em] font-semibold"><i class="fas fa-bolt mr-1"></i>Almost unlocked! Log ${phase.tradeReq-entries.length} more trade${phase.tradeReq-entries.length>1?'s':''}.</div>`
-                : ''}
-            ${entries.length>=phase.tradeReq && !completed.includes(i)
-                ? `<div class="mt-1 text-green-300 text-[0.92em] font-semibold"><i class="fas fa-unlock mr-1"></i>Phase unlocked! Mark complete to advance.</div>`
-                : ''}
-            `;
-
-          if(entries.length>=phase.tradeReq) unlocked.push(i);
-        });
-
-        // Auto-complete newly unlocked phases unless already marked
-        unlocked.forEach(i=>{
-          if(!completed.includes(i)){
-            completed.push(i);
-            // Animate phase card
-            const ph = phases[i];
-            if(ph) {
-              ph.classList.add("ring-4","ring-green-400");
-              setTimeout(()=>ph.classList.remove("ring-4","ring-green-400"), 1300);
-            }
-            // (Optional) Confetti: if you have confetti lib, enable here
-            if(window.confetti) setTimeout(()=>confetti({particleCount:60,spread:70,origin:{y:0.25}}),500);
-          }
-        });
-
-        // Save state
-        localStorage.setItem("syllabusCompletedPhases",JSON.stringify(completed));
-        // Progress bar
-        const prog = Math.floor((completed.length/totalPhases)*100);
-        document.getElementById("syllabus-progress-bar").style.width = prog+"%";
-        document.getElementById("syllabus-progress-label").textContent = prog+"% Complete";
-        // Completed labels
-        const labels = document.getElementById("syllabus-completed-labels");
-        labels.innerHTML = completed.map(idx=>{
-          const h3=phases[idx]?.querySelector("h3");
-          return `<span class="bg-green-700/60 px-2 py-1 rounded text-green-100 font-semibold shadow">${h3? h3.textContent : "Phase "+(idx+1)}</span>`;
-        }).join(" ");
-        // Visual phase marking
-        phases.forEach((ph,idx)=>{
-          if(completed.includes(idx)){
-            ph.classList.add("completed");
-            btns[idx] && btns[idx].classList.add("completed");
-            btns[idx] && (btns[idx].innerHTML='<i class="fas fa-check-double"></i> Completed');
-          } else {
-            ph.classList.remove("completed");
-            btns[idx] && btns[idx].classList.remove("completed");
-            btns[idx] && (btns[idx].innerHTML='<i class="fas fa-check-circle"></i> Mark Phase Complete');
-          }
-        });
-      }
-
-      // Manual Mark Complete (override)
-      btns.forEach((btn,idx)=>{
-        btn.onclick = function(){
-          if(!completed.includes(idx)){
-            completed.push(idx);
-            localStorage.setItem("syllabusCompletedPhases",JSON.stringify(completed));
-            updatePhaseStatsAndUnlock();
-          }
-        };
+        
+        updatePhaseStats(index);
       });
+      
+      updateOverallProgress();
+      updateAchievementBadges();
+    }
 
-      // Reset Progress Button
-      const resetBtn = document.getElementById("syllabus-reset-btn");
+    function updateOverallProgress() {
+      const completed = getCompleted();
+      const progress = Math.floor((completed.length / SYLLABUS_PHASES.length) * 100);
+      
+      const progressBar = document.getElementById('syllabus-progress-bar');
+      const progressLabel = document.getElementById('syllabus-progress-label');
+      
+      if (progressBar) progressBar.style.width = progress + '%';
+      if (progressLabel) progressLabel.textContent = progress + '% Complete';
+    }
+
+    function updateAchievementBadges() {
+      const completed = getCompleted();
+      const badgeContainer = document.getElementById('syllabus-completed-labels');
+      
+      if (badgeContainer) {
+        badgeContainer.innerHTML = completed.map(index => {
+          const phase = SYLLABUS_PHASES[index];
+          return `<div class="achievement-badge">
+            <span class="icon icon-trophy mr-2"></span>
+            ${phase.name.split(':')[0]}
+          </div>`;
+        }).join('');
+      }
+    }
+
+    function showAchievementBadge(phaseIndex) {
+      // Create a temporary notification
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-4 rounded-lg shadow-xl z-50';
+      notification.innerHTML = `
+        <div class="flex items-center gap-3">
+          <span class="icon icon-trophy text-2xl"></span>
+          <div>
+            <div class="font-bold">Phase Completed!</div>
+            <div class="text-sm opacity-90">${SYLLABUS_PHASES[phaseIndex].name.split(':')[0]}</div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.remove();
+      }, 4000);
+    }
+
+    // === HELPER FUNCTIONS ===
+    function getCompleted() {
+      return JSON.parse(localStorage.getItem("syllabusCompletedPhases") || "[]");
+    }
+
+    function getJournal() {
+      try {
+        const data = localStorage.getItem(window.JOURNAL_KEY || "griffinsrise_journal_v1");
+        return data ? JSON.parse(data) : [];
+      } catch { return []; }
+    }
+
+    function assignEntriesToPhases(journal) {
+      const entriesByPhase = SYLLABUS_PHASES.map(() => []);
+      let tradeIdx = 0;
+      
+      for (const entry of journal) {
+        let phaseIdx = typeof entry.phase === "number" ? entry.phase : null;
+        
+        if (phaseIdx == null) {
+          // Auto-assign by order
+          let running = 0;
+          for (let i = 0; i < SYLLABUS_PHASES.length; i++) {
+            running += SYLLABUS_PHASES[i].tradeReq;
+            if (tradeIdx < running) {
+              phaseIdx = i;
+              break;
+            }
+          }
+          if (phaseIdx == null) phaseIdx = SYLLABUS_PHASES.length - 1;
+        }
+        
+        if (entriesByPhase[phaseIdx]) entriesByPhase[phaseIdx].push(entry);
+        tradeIdx++;
+      }
+      
+      return entriesByPhase;
+    }
+
+    // === INITIALIZATION ===
+    document.addEventListener("DOMContentLoaded", function() {
+      // Setup reset button
+      const resetBtn = document.getElementById('syllabus-reset-btn');
       if (resetBtn) {
-        resetBtn.onclick = function(){
-          if(confirm("Are you sure you want to reset your syllabus progress? This cannot be undone.")){
-            completed = [];
+        resetBtn.onclick = function() {
+          if (confirm("Are you sure you want to reset your syllabus progress? This cannot be undone.")) {
             localStorage.removeItem("syllabusCompletedPhases");
-            updatePhaseStatsAndUnlock();
+            updateAllPhaseStates();
           }
         };
       }
-
-      // Table of contents scroll
-      document.querySelectorAll(".syllabus-link").forEach(link=>{
-        link.onclick = function(e){
-          e.preventDefault();
-          const id = link.getAttribute("href").replace("#","");
-          const el = document.getElementById(id);
-          if(el){
-            el.scrollIntoView({behavior:"smooth",block:"start"});
-            el.classList.add("ring-4","ring-yellow-300");
-            setTimeout(()=>el.classList.remove("ring-4","ring-yellow-300"),1500);
-          }
-        }
-      });
-
-      // === INITIALIZE & LIVE UPDATES ===
-      updatePhaseStatsAndUnlock();
-      // Listen for journal changes (if journal triggers this event)
-      window.addEventListener("journalChanged", updatePhaseStatsAndUnlock);
-      // Or poll every 5 seconds (as fallback)
-      setInterval(updatePhaseStatsAndUnlock, 5000);
+      
+      // Initialize phase states
+      updateAllPhaseStates();
+      
+      // Listen for journal changes
+      window.addEventListener("journalChanged", updateAllPhaseStates);
+      setInterval(updateAllPhaseStates, 10000); // Update every 10 seconds
     });
   </script>
 </section>  
 <!-- Training Manual -->
-<!-- Training Manual Section (with full curriculum, lessons, and how-to, formatted for display) -->
+<!-- Training Manual Section: Professional Pro Edition -->
 <section id="trainingManualContent" class="hidden">
-  <div class="manual-section p-8 rounded-xl shadow mb-8 mx-auto bg-[#232946] border border-blue-900" style="max-width:60rem;">
-    <h2 class="text-3xl font-extrabold mb-5 text-blue-200 flex items-center gap-3">
-      <i class="fas fa-book text-yellow-300"></i>
-      Training Manual: Short Thesis Mastery & Journaling
-    </h2>
-    <div class="text-blue-100 text-base sm:text-lg space-y-10">
-      <!-- PHASES/LESSONS -->
-      <!-- ========== THE FOUNDATION ========== -->
-      <div>
-        <h3 class="text-2xl font-bold text-yellow-200 mb-3">Phase 1: THE FOUNDATION</h3>
-        <!-- Lesson 1 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 1: Foundation, Mindset, & Platform Choices</h4>
-          <ul class="pl-7 list-disc mb-2">
-            <li>This lesson builds your mental armor and understanding of the battlefield.</li>
-            <li><span class="font-semibold">Task 1: Internalize Deep Skepticism</span>
-              <ul class="list-decimal pl-6 mb-1">
-                <li>Open www.x.com (formerly Twitter) and search for #memecoin or #1000xgem.</li>
-                <li>Click the 'Latest' tab to see new posts; find a post with high engagement promoting a coin (e.g., $WXYZ).</li>
-                <li>Search for the coin's official website. In your journal, write three skeptical questions based on your findings.</li>
-              </ul>
-              <div class="text-blue-300 text-sm pl-7 italic">e.g. "The website claims 'AI-powered decentralization.' Where is the technical whitepaper that explains this? Which AI models? How is it different from existing projects?"</div>
-            </li>
-            <li><span class="font-semibold">Task 2: Internalize Probabilistic Thinking</span>
-              <ul class="list-decimal pl-6 mb-1">
-                <li>Read the "Probabilistic Thinking" resource from the syllabus.</li>
-                <li>In your journal, complete: "Being a probabilistic trader means I accept that I can do everything right and still lose a trade... My goal is to be profitable over a large series of trades because my winners will outweigh my losers."</li>
-              </ul>
-            </li>
-            <li><span class="font-semibold">Task 3: Learn to Formulate a Short Thesis</span>
-              <ul class="list-decimal pl-6 mb-1">
-                <li>Go to www.coingecko.com. Find and add the '% ATH' column if needed.</li>
-                <li>Click '% ATH' twice to sort by largest drops. Find a coin with a recognizable name and 24h volume &gt; $500,000.</li>
-                <li>In your journal, write a one-sentence short thesis for a coin you find.
-                  <div class="text-blue-300 text-sm pl-7 italic">e.g. "The short thesis for ExampleCoin (EXC) is that it was a failed hype cycle, confirmed by a 95% price collapse on declining volume."</div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <!-- Lesson 2 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 2: Risk Management Mastery</h4>
-          <div>This is the science of survival. 👨‍🔬</div>
-          <div class="mt-1 mb-2 font-semibold">Task: Master Position Sizing</div>
-          <ul class="list-decimal pl-6">
-            <li>Open the BabyPips Position Size Calculator from the syllabus resources.</li>
-            <li>Scenario: $10,000 account, risk 1% on SOL short, enter at $150, stop-loss at $153.</li>
-            <li>In calculator: Account Currency USD, Balance 10000, Risk% 1, Stop Loss (pips) 3000 (since $3 = 3000 pips), Entry Price 150.</li>
-            <li>Calculator gives position size—amount of SOL to short to risk only $100.</li>
-            <li>Do the three sample trades from the syllabus in your journal.</li>
-          </ul>
-        </div>
-        <!-- Lesson 3 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 3: Platform Mastery & Tool Setup</h4>
-          <div>This is your pre-flight checklist. 🚀</div>
-          <div class="font-semibold mt-1">Task 1: Secure Your CeFi Account (MEXC)</div>
-          <ul class="list-decimal pl-6 mb-1">
-            <li>Log into MEXC. Go to 'Security' under your profile.</li>
-            <li>Setup MEXC/Google Authenticator and back up your security key.</li>
-          </ul>
-          <div class="font-semibold">Task 2: Secure Your DeFi Wallet (Ledger + MetaMask)</div>
-          <ul class="list-decimal pl-6 mb-1">
-            <li>Plug in Ledger, unlock, and open Ethereum app.</li>
-            <li>Unlock MetaMask. Click the circle icon, select "Connect Hardware Wallet", choose Ledger, and follow the prompts.</li>
-            <li>Select your Ledger ETH address in MetaMask; connect it to Hyperliquid by choosing MetaMask and then the Ledger-tagged account.</li>
-            <li class="text-red-300">Store your Ledger 24-word Recovery Phrase offline, never digitally.</li>
-          </ul>
-          <div class="font-semibold">Task 3: Place a Test Order</div>
-          <ul class="list-decimal pl-6">
-            <li>On MEXC Futures, select BTC/USDT, use Limit order, price far from current, minimum amount, click Sell/Short, then Cancel.</li>
-            <li>Repeat on Hyperliquid; approve via Ledger device when prompted.</li>
-          </ul>
-        </div>
-        <!-- Applied Module 1 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-blue-200">Applied Learning Module 1: Anatomy of a World-Class Short</h4>
-          <div>Goal: Synthesize foundation lessons to build a high-conviction trade plan.</div>
-          <ol class="list-decimal pl-6 mt-1">
-            <li><span class="font-semibold">Target Acquisition:</span> On CoinGecko, filter for 24h Volume &gt; $2M, find Aetherium Prime ($AEP), down 82% from ATH, $5M volume.</li>
-            <li><span class="font-semibold">Investigation:</span>
-              <ul class="list-disc pl-7">
-                <li><span class="underline">Narrative & Sentiment:</span> On LunarCrush, $AEP's social metrics have flatlined, sentiment is bearish.</li>
-                <li><span class="underline">Tokenomics:</span> On token.unlocks.app, 20% supply unlock in 2 weeks—a bearish catalyst.</li>
-                <li><span class="underline">Insider Wallets:</span> On Arkham Intelligence, a VC wallet is preparing to sell.</li>
-              </ul>
-            </li>
-            <li><span class="font-semibold">Synthesis:</span> Write a thesis: "$AEP is a failed story coin, retail hype has died, and a 20% supply unlock for VCs is confirmed by on-chain prep to sell. High-probability short."</li>
-            <li><span class="font-semibold">Tactical Plan:</span>
-              <ul class="list-disc pl-7">
-                <li>Chart: AEP/USDT on MEXC</li>
-                <li>Entry: Limit sell at $2.00</li>
-                <li>Stop-Loss: $2.20</li>
-                <li>Position Size: 1% of $10,000 = 500 AEP</li>
-              </ul>
-            </li>
-          </ol>
-        </div>
+  <div class="max-w-6xl mx-auto p-6">
+    <!-- Header Section -->
+    <div class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl p-6 mb-8 shadow-xl">
+      <div class="flex items-center gap-4 mb-4">
+        <span class="icon icon-book text-3xl text-white"></span>
+        <h2 class="text-3xl font-extrabold text-white flex-1">Training Manual: Short Thesis Mastery</h2>
+        <span class="bg-white bg-opacity-20 text-white px-4 py-2 rounded-full text-sm font-bold">Pro Guide</span>
       </div>
-      <!-- ========== SHORT THESIS & DISCOVERY ========== -->
-      <div>
-        <h3 class="text-2xl font-bold text-yellow-200 mb-3">Phase 2: Short Thesis & Discovery</h3>
-        <!-- Lesson 4 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 4: Short Thesis Discovery & Analysis</h4>
-          <div>Task: Discover a "Failed Hype Cycle" Candidate</div>
-          <ul class="list-decimal pl-6">
-            <li>Go to www.dexscreener.com, click 'New Pairs'.</li>
-            <li>Sort by '1h' gainers. Look for tokens up 500%+ with age a few hours.</li>
-            <li>Bookmark and revisit in 24-48h. If price collapses, analyze in your journal.</li>
-          </ul>
-        </div>
-        <!-- Lesson 5 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 5: Red Flags & Scam Spotting</h4>
-          <div>Task: Spot a "Rug Pull" Red Flag</div>
-          <ul class="list-decimal pl-6">
-            <li>Find a new token on Dexscreener.</li>
-            <li>Look for 'Liquidity is Locked'. Red box warnings about unlocked liquidity or high holder concentration are major red flags.</li>
-            <li>Screenshot and journal the red flag.</li>
-          </ul>
-        </div>
-        <!-- Applied Module 2 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-blue-200">Applied Learning Module 2: A Tale of Two Red Flags</h4>
-          <div>
-            <b>Case 1:</b> The "Honeypot" Scam — No SELL transactions, only BUYs, Dexscreener flags. "Too good to be true" = trap.<br>
-            <b>Case 2:</b> The "Slow Rug" — DeFi project down 95%, abandoned social, devs slowly cashing out. Journal these findings.
+      <p class="text-white text-lg opacity-90">Step-by-step actionable lessons for professional trading mastery</p>
+    </div>
+
+    <!-- Phase Cards -->
+    <div class="space-y-8">
+      <!-- Phase 1: Foundation -->
+      <div class="bg-gradient-to-br from-green-400 to-blue-500 rounded-xl p-6 shadow-xl">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="icon icon-cubes text-3xl text-white"></span>
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-white">Phase 1: The Foundation</h3>
+            <p class="text-green-100">Build your mental armor and trading infrastructure</p>
           </div>
         </div>
-      </div>
-      <!-- ========== EXECUTION & JOURNALING ========== -->
-      <div>
-        <h3 class="text-2xl font-bold text-yellow-200 mb-3">Phase 3: Execution & Journaling</h3>
-        <!-- Lesson 6 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 6: Short Entry Execution</h4>
-          <div>Task: Identify an Optimal Entry Point</div>
-          <ul class="list-decimal pl-6">
-            <li>On TradingView, load a pump-and-dump token's 1H chart.</li>
-            <li>Mark horizontal support where price bounced up.</li>
-            <li>Find where price crashed below that line (broken support).</li>
-            <li>Optimal short entry is often a retest of the broken support from below.</li>
-          </ul>
-        </div>
-        <!-- Lesson 7 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 7: Journaling for Improvement</h4>
-          <div>This is the most important habit of any professional trader.</div>
-          <ul class="list-decimal pl-6">
-            <li>In a spreadsheet, create columns: Date, Asset, Thesis, Entry, SL, TP, Position Size, Outcome (W/L), P&L ($), Emotion/Psychology, Mistakes/Lessons.</li>
-            <li>After every trade, fill out the journal—be honest, especially about emotions and lessons.</li>
-          </ul>
-        </div>
-        <!-- Applied Module 3 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-blue-200">Applied Learning Module 3: From Plan to Action</h4>
-          <div>
-            <b>Scenario:</b> $AEP trade plan is active. Price rallies to $2.00.<br>
-            <b>Execution:</b> On MEXC, Limit Sell 500 AEP at $2.00, TP $1.20, SL $2.20.<br>
-            <b>Outcome:</b> TP hit at $1.20, +$400 profit.<br>
-            <b>Journaling:</b> Asset: $AEP, Thesis: "Failed hype + VC unlock", Entry: $2.00, SL: $2.20, TP: $1.20, Outcome: Win, P&L: $400, Emotion: "Anxious, but trusted plan", Lesson: "Research edge is key."
+        
+        <div class="space-y-6">
+          <!-- Lesson 1 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-brain"></span>
+              Lesson 1: Foundation, Mindset, & Platform Choices
+            </h4>
+            <p class="text-blue-700 mb-4">This lesson builds your mental armor and understanding of the battlefield.</p>
+            
+            <div class="space-y-4">
+              <div class="border-l-4 border-blue-500 pl-4">
+                <h5 class="font-semibold text-blue-900 mb-2">Task 1: Internalize Deep Skepticism</h5>
+                <div class="text-sm text-blue-800 space-y-1">
+                  <p>• Open www.x.com (formerly Twitter) and search for #memecoin or #1000xgem</p>
+                  <p>• Click the 'Latest' tab to see new posts; find a post with high engagement promoting a coin</p>
+                  <p>• Search for the coin's official website. In your journal, write three skeptical questions</p>
+                  <div class="mt-2 p-3 bg-blue-50 rounded italic text-xs">
+                    Example: "The website claims 'AI-powered decentralization.' Where is the technical whitepaper that explains this? Which AI models? How is it different from existing projects?"
+                  </div>
+                </div>
+              </div>
+              
+              <div class="border-l-4 border-green-500 pl-4">
+                <h5 class="font-semibold text-blue-900 mb-2">Task 2: Internalize Probabilistic Thinking</h5>
+                <div class="text-sm text-blue-800 space-y-1">
+                  <p>• Read the "Probabilistic Thinking" resource from the syllabus</p>
+                  <p>• In your journal, complete: "Being a probabilistic trader means I accept that I can do everything right and still lose a trade... My goal is to be profitable over a large series of trades because my winners will outweigh my losers."</p>
+                </div>
+              </div>
+              
+              <div class="border-l-4 border-purple-500 pl-4">
+                <h5 class="font-semibold text-blue-900 mb-2">Task 3: Learn to Formulate a Short Thesis</h5>
+                <div class="text-sm text-blue-800 space-y-1">
+                  <p>• Go to www.coingecko.com. Find and add the '% ATH' column if needed</p>
+                  <p>• Click '% ATH' twice to sort by largest drops. Find a coin with recognizable name and 24h volume > $500,000</p>
+                  <p>• In your journal, write a one-sentence short thesis for a coin you find</p>
+                  <div class="mt-2 p-3 bg-purple-50 rounded italic text-xs">
+                    Example: "The short thesis for ExampleCoin (EXC) is that it was a failed hype cycle, confirmed by a 95% price collapse on declining volume."
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 2 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-target"></span>
+              Lesson 2: Risk Management Mastery
+            </h4>
+            <p class="text-blue-700 mb-4">This is the science of survival. 👨‍🔬</p>
+            
+            <div class="border-l-4 border-red-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Master Position Sizing</h5>
+              <div class="text-sm text-blue-800 space-y-1">
+                <p>• Open the BabyPips Position Size Calculator from the syllabus resources</p>
+                <p>• Scenario: $10,000 account, risk 1% on SOL short, enter at $150, stop-loss at $153</p>
+                <p>• In calculator: Account Currency USD, Balance 10000, Risk% 1, Stop Loss (pips) 3000 (since $3 = 3000 pips), Entry Price 150</p>
+                <p>• Calculator gives position size—amount of SOL to short to risk only $100</p>
+                <p>• Do the three sample trades from the syllabus in your journal</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 3 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-rocket"></span>
+              Lesson 3: Platform Mastery & Tool Setup
+            </h4>
+            <p class="text-blue-700 mb-4">This is your pre-flight checklist. 🚀</p>
+            
+            <div class="space-y-4">
+              <div class="border-l-4 border-yellow-500 pl-4">
+                <h5 class="font-semibold text-blue-900 mb-2">Task 1: Secure Your CeFi Account (MEXC)</h5>
+                <div class="text-sm text-blue-800 space-y-1">
+                  <p>• Log into MEXC. Go to 'Security' under your profile</p>
+                  <p>• Setup MEXC/Google Authenticator and back up your security key</p>
+                </div>
+              </div>
+              
+              <div class="border-l-4 border-indigo-500 pl-4">
+                <h5 class="font-semibold text-blue-900 mb-2">Task 2: Secure Your DeFi Wallet (Ledger + MetaMask)</h5>
+                <div class="text-sm text-blue-800 space-y-1">
+                  <p>• Plug in Ledger, unlock, and open Ethereum app</p>
+                  <p>• Unlock MetaMask. Click the circle icon, select "Connect Hardware Wallet", choose Ledger</p>
+                  <p>• Select your Ledger ETH address in MetaMask; connect it to Hyperliquid</p>
+                  <p class="text-red-600 font-semibold">• Store your Ledger 24-word Recovery Phrase offline, never digitally</p>
+                </div>
+              </div>
+              
+              <div class="border-l-4 border-green-500 pl-4">
+                <h5 class="font-semibold text-blue-900 mb-2">Task 3: Place a Test Order</h5>
+                <div class="text-sm text-blue-800 space-y-1">
+                  <p>• On MEXC Futures, select BTC/USDT, use Limit order, price far from current, minimum amount, click Sell/Short, then Cancel</p>
+                  <p>• Repeat on Hyperliquid; approve via Ledger device when prompted</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied Module 1 -->
+          <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg p-5 text-white">
+            <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+              <span class="icon icon-diamond"></span>
+              Applied Learning Module 1: Anatomy of a World-Class Short
+            </h4>
+            <p class="mb-4 opacity-90">Goal: Synthesize foundation lessons to build a high-conviction trade plan.</p>
+            
+            <div class="space-y-3 text-sm">
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Target Acquisition:</strong> On CoinGecko, filter for 24h Volume > $2M, find Aetherium Prime ($AEP), down 82% from ATH, $5M volume.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Investigation:</strong>
+                <ul class="mt-2 space-y-1 ml-4">
+                  <li>• <strong>Narrative & Sentiment:</strong> On LunarCrush, $AEP's social metrics have flatlined, sentiment is bearish</li>
+                  <li>• <strong>Tokenomics:</strong> On token.unlocks.app, 20% supply unlock in 2 weeks—a bearish catalyst</li>
+                  <li>• <strong>Insider Wallets:</strong> On Arkham Intelligence, a VC wallet is preparing to sell</li>
+                </ul>
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Synthesis:</strong> Write a thesis: "$AEP is a failed story coin, retail hype has died, and a 20% supply unlock for VCs is confirmed by on-chain prep to sell. High-probability short."
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Tactical Plan:</strong> Chart: AEP/USDT on MEXC | Entry: Limit sell at $2.00 | Stop-Loss: $2.20 | Position Size: 1% of $10,000 = 500 AEP
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- ========== ADVANCED SCENARIOS & PSYCHOLOGY ========== -->
-      <div>
-        <h3 class="text-2xl font-bold text-yellow-200 mb-3">Phase 4: Advanced Scenarios & Psychology</h3>
-        <!-- Lesson 8 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 8: Trader Psychology & FOMO</h4>
-          <div>Task: Document FOMO — When you feel the urge to chase a pump, pause and journal the feeling. Recognizing FOMO is the first step to control.</div>
-        </div>
-        <!-- Lesson 9 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 9: Dealing with Losses & Tilt</h4>
-          <div>Task: Create a "Circuit Breaker"</div>
-          <div>
-            Example Rule: <span class="text-blue-300 italic">"If I lose 3 trades in a row, OR my account is down 2% in a day, I will shut down and not trade for 24h. No exceptions."</span>
+
+      <!-- Phase 2: Short Thesis & Discovery -->
+      <div class="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl p-6 shadow-xl">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="icon icon-search text-3xl text-white"></span>
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-white">Phase 2: Short Thesis & Discovery</h3>
+            <p class="text-yellow-100">Master market research and red flag identification</p>
           </div>
         </div>
-        <!-- Applied Module 4 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-blue-200">Applied Learning Module 4: The Losing Trade</h4>
-          <div>
-            <b>Scenario:</b> Short thesis on $BETA, but surprise positive news hits. Stop-loss triggered, lose 1%.<br>
-            <b>Psych Response:</b> Initial anger, urge to revenge trade.<br>
-            <b>Professional Process:</b> Recognize emotion → execute "circuit breaker" → log out → journal trade and feelings.<br>
-            <b>Lesson:</b> Losses happen outside your control. Journaling turns emotion into lesson and reinforces discipline.
+
+        <div class="space-y-6">
+          <!-- Lesson 4 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-search"></span>
+              Lesson 4: Short Thesis Discovery & Analysis
+            </h4>
+            
+            <div class="border-l-4 border-orange-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Discover a "Failed Hype Cycle" Candidate</h5>
+              <div class="text-sm text-blue-800 space-y-1">
+                <p>• Go to www.dexscreener.com, click 'New Pairs'</p>
+                <p>• Sort by '1h' gainers. Look for tokens up 500%+ with age a few hours</p>
+                <p>• Bookmark and revisit in 24-48h. If price collapses, analyze in your journal</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 5 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-fire"></span>
+              Lesson 5: Red Flags & Scam Spotting
+            </h4>
+            
+            <div class="border-l-4 border-red-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Spot a "Rug Pull" Red Flag</h5>
+              <div class="text-sm text-blue-800 space-y-1">
+                <p>• Find a new token on Dexscreener</p>
+                <p>• Look for 'Liquidity is Locked'. Red box warnings about unlocked liquidity or high holder concentration are major red flags</p>
+                <p>• Screenshot and journal the red flag</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied Module 2 -->
+          <div class="bg-gradient-to-r from-red-500 to-pink-600 rounded-lg p-5 text-white">
+            <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+              <span class="icon icon-fire"></span>
+              Applied Learning Module 2: A Tale of Two Red Flags
+            </h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Case 1:</strong> The "Honeypot" Scam — No SELL transactions, only BUYs, Dexscreener flags. "Too good to be true" = trap.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Case 2:</strong> The "Slow Rug" — DeFi project down 95%, abandoned social, devs slowly cashing out. Journal these findings.
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- ========== MASTERY & PEER REVIEW ========== -->
-      <div>
-        <h3 class="text-2xl font-bold text-yellow-200 mb-3">Phase 5: Mastery & Peer Review</h3>
-        <!-- Lesson 10 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 10: Peer Review & Community</h4>
-          <ul class="list-decimal pl-6">
-            <li>Go to TradingView &gt; Community or Ideas tab.</li>
-            <li>Find a published short idea for crypto. Read and critique in your journal.</li>
-            <li class="text-blue-300 text-sm pl-7 italic">
-              e.g. "Good bearish pattern, but thesis lacks tokenomics. Stop-loss too wide, poor R:R."
-            </li>
-          </ul>
-        </div>
-        <!-- Lesson 11 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-pink-200 mb-1">Lesson 11: Final Project & Certification</h4>
-          <div>
-            <span class="font-semibold">Task:</span> Paper trade for 1 month. Log at least 10-15 trades with full journal entries. Review best/worst trades and write your final report as per syllabus. This is your certification for live trading.
+
+      <!-- Phase 3: Execution & Journaling -->
+      <div class="bg-gradient-to-br from-pink-400 to-red-500 rounded-xl p-6 shadow-xl">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="icon icon-pen text-3xl text-white"></span>
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-white">Phase 3: Execution & Journaling</h3>
+            <p class="text-pink-100">Execute trades with precision and document everything</p>
           </div>
         </div>
-        <!-- Applied Module 5 -->
-        <div class="mb-4">
-          <h4 class="text-xl font-bold text-blue-200">Applied Learning Module 5: From Trader to Analyst</h4>
-          <div>
-            <b>Scenario:</b> End of certification month, 12 paper trades, 7 winners, 5 losers, net P&L positive.<br>
-            <b>Report:</b> Analyze one winning, one losing trade. Focus on execution and process, not outcome.<br>
-            <b>Reflection:</b> "My biggest lesson: My job is to be a risk manager, not a predictor. Profits came from discipline and cutting losses. I am now ready for live trading with a professional process."
+
+        <div class="space-y-6">
+          <!-- Lesson 6 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-target"></span>
+              Lesson 6: Short Entry Execution
+            </h4>
+            
+            <div class="border-l-4 border-pink-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Identify an Optimal Entry Point</h5>
+              <div class="text-sm text-blue-800 space-y-1">
+                <p>• On TradingView, load a pump-and-dump token's 1H chart</p>
+                <p>• Mark horizontal support where price bounced up</p>
+                <p>• Find where price crashed below that line (broken support)</p>
+                <p>• Optimal short entry is often a retest of the broken support from below</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 7 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-book"></span>
+              Lesson 7: Journaling for Improvement
+            </h4>
+            <p class="text-blue-700 mb-4">This is the most important habit of any professional trader.</p>
+            
+            <div class="border-l-4 border-blue-500 pl-4">
+              <div class="text-sm text-blue-800 space-y-1">
+                <p>• In a spreadsheet, create columns: Date, Asset, Thesis, Entry, SL, TP, Position Size, Outcome (W/L), P&L ($), Emotion/Psychology, Mistakes/Lessons</p>
+                <p>• After every trade, fill out the journal—be honest, especially about emotions and lessons</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied Module 3 -->
+          <div class="bg-gradient-to-r from-green-500 to-blue-600 rounded-lg p-5 text-white">
+            <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+              <span class="icon icon-check"></span>
+              Applied Learning Module 3: From Plan to Action
+            </h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Scenario:</strong> $AEP trade plan is active. Price rallies to $2.00.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Execution:</strong> On MEXC, Limit Sell 500 AEP at $2.00, TP $1.20, SL $2.20.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Outcome:</strong> TP hit at $1.20, +$400 profit.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Journaling:</strong> Asset: $AEP, Thesis: "Failed hype + VC unlock", Entry: $2.00, SL: $2.20, TP: $1.20, Outcome: Win, P&L: $400, Emotion: "Anxious, but trusted plan", Lesson: "Research edge is key."
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- END PHASES -->
-      <div class="text-center mt-10">
-        <span class="inline-block text-lg text-green-300 font-bold">This manual is your edge. Revisit before every big trade. <span class="ml-2">🚀</span></span>
+
+      <!-- Phase 4: Advanced Scenarios & Psychology -->
+      <div class="bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl p-6 shadow-xl">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="icon icon-brain text-3xl text-white"></span>
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-white">Phase 4: Advanced Scenarios & Psychology</h3>
+            <p class="text-purple-100">Master your mind and control your emotions</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Lesson 8 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-brain"></span>
+              Lesson 8: Trader Psychology & FOMO
+            </h4>
+            
+            <div class="border-l-4 border-purple-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Document FOMO</h5>
+              <div class="text-sm text-blue-800">
+                <p>When you feel the urge to chase a pump, pause and journal the feeling. Recognizing FOMO is the first step to control.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 9 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-fire"></span>
+              Lesson 9: Dealing with Losses & Tilt
+            </h4>
+            
+            <div class="border-l-4 border-red-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Create a "Circuit Breaker"</h5>
+              <div class="text-sm text-blue-800">
+                <p><strong>Example Rule:</strong> "If I lose 3 trades in a row, OR my account is down 2% in a day, I will shut down and not trade for 24h. No exceptions."</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied Module 4 -->
+          <div class="bg-gradient-to-r from-red-500 to-purple-600 rounded-lg p-5 text-white">
+            <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+              <span class="icon icon-fire"></span>
+              Applied Learning Module 4: The Losing Trade
+            </h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Scenario:</strong> Short thesis on $BETA, but surprise positive news hits. Stop-loss triggered, lose 1%.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Psych Response:</strong> Initial anger, urge to revenge trade.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Professional Process:</strong> Recognize emotion → execute "circuit breaker" → log out → journal trade and feelings.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Lesson:</strong> Losses happen outside your control. Journaling turns emotion into lesson and reinforces discipline.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 5: Mastery & Peer Review -->
+      <div class="bg-gradient-to-br from-yellow-400 to-green-400 rounded-xl p-6 shadow-xl">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="icon icon-certificate text-3xl text-white"></span>
+          <div class="flex-1">
+            <h3 class="text-2xl font-bold text-white">Phase 5: Mastery & Peer Review</h3>
+            <p class="text-yellow-100">Achieve certification and join the professional community</p>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <!-- Lesson 10 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-star"></span>
+              Lesson 10: Peer Review & Community
+            </h4>
+            
+            <div class="border-l-4 border-green-500 pl-4">
+              <div class="text-sm text-blue-800 space-y-1">
+                <p>• Go to TradingView > Community or Ideas tab</p>
+                <p>• Find a published short idea for crypto. Read and critique in your journal</p>
+                <div class="mt-2 p-3 bg-green-50 rounded italic text-xs">
+                  Example: "Good bearish pattern, but thesis lacks tokenomics. Stop-loss too wide, poor R:R."
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lesson 11 -->
+          <div class="bg-white bg-opacity-95 rounded-lg p-5">
+            <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2">
+              <span class="icon icon-certificate"></span>
+              Lesson 11: Final Project & Certification
+            </h4>
+            
+            <div class="border-l-4 border-yellow-500 pl-4">
+              <h5 class="font-semibold text-blue-900 mb-2">Task: Achieve Professional Certification</h5>
+              <div class="text-sm text-blue-800">
+                <p>Paper trade for 1 month. Log at least 10-15 trades with full journal entries. Review best/worst trades and write your final report as per syllabus. This is your certification for live trading.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Applied Module 5 -->
+          <div class="bg-gradient-to-r from-green-500 to-yellow-500 rounded-lg p-5 text-white">
+            <h4 class="text-xl font-bold mb-3 flex items-center gap-2">
+              <span class="icon icon-trophy"></span>
+              Applied Learning Module 5: From Trader to Analyst
+            </h4>
+            <div class="space-y-3 text-sm">
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Scenario:</strong> End of certification month, 12 paper trades, 7 winners, 5 losers, net P&L positive.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Report:</strong> Analyze one winning, one losing trade. Focus on execution and process, not outcome.
+              </div>
+              <div class="bg-white bg-opacity-20 rounded p-3">
+                <strong>Reflection:</strong> "My biggest lesson: My job is to be a risk manager, not a predictor. Profits came from discipline and cutting losses. I am now ready for live trading with a professional process."
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 bg-blue-900 rounded-xl p-6 shadow-lg text-center">
+      <div class="flex items-center justify-center gap-3 mb-4">
+        <span class="icon icon-rocket text-2xl text-yellow-300"></span>
+        <h3 class="text-xl font-bold text-white">Your Trading Edge</h3>
+      </div>
+      <p class="text-blue-100 text-lg mb-2">This manual is your edge. Revisit before every big trade.</p>
+      <div class="flex items-center justify-center gap-2 text-yellow-300">
+        <span class="icon icon-diamond"></span>
+        <span class="text-sm font-semibold">Pro Edition • Advanced Trading Mastery</span>
+        <span class="icon icon-diamond"></span>
       </div>
     </div>
   </div>
@@ -891,16 +1613,6 @@
         <div>
           <label class="block mb-1" for="journal-phase">Phase</label>
           <select id="journal-phase" required class="w-full">
-            <option value="Foundation">Foundation</option>
-            <option value="Short Thesis & Discovery">Short Thesis & Discovery</option>
-            <option value="Execution & Journaling">Execution & Journaling</option>
-            <option value="Advanced Scenarios & Psychology">Advanced Scenarios & Psychology</option>
-            <option value="Mastery & Peer Review">Mastery & Peer Review</option>
-          </select>
-        </div>
-        <div>
-          <label class="block mb-1" for="edit-phase">Phase</label>
-          <select id="edit-phase" required class="w-full">
             <option value="Foundation">Foundation</option>
             <option value="Short Thesis & Discovery">Short Thesis & Discovery</option>
             <option value="Execution & Journaling">Execution & Journaling</option>
